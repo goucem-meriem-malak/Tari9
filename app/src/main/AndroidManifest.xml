@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.RECEIVE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Tari9"
+        tools:targetApi="31">
+
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
+
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDxklwNV2U-OK_zc4KrgdmaEyAjf81taAo" />
+        <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
+        <activity
+            android:name=".launch_screen"
+            android:exported="true"
+            android:label="@string/tari9">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/sign_up">
+        </activity>
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <activity
+            android:name=".list_mechanics"
+            android:exported="true"
+            android:label="@string/sign_up">
+        </activity>
+        <activity
+            android:name=".edit_profile"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true"
+            android:label="@string/sign_up">
+        </activity>
+        <activity
+            android:name=".profile_worker"
+            android:exported="true"
+            android:label="@string/sign_in">
+        </activity>
+        <activity
+            android:name=".sign_up"
+            android:exported="true"
+            android:label="@string/sign_in">
+        </activity>
+        <activity
+            android:name=".request_worker"
+            android:exported="true"
+            android:label="@string/garage_services">
+        </activity>
+        <activity
+            android:name=".list_ambulance"
+            android:exported="true"
+            android:label="@string/garage_services">
+        </activity>
+        <activity
+            android:name=".todelete1"
+            android:exported="true"
+            android:label="@string/sign_in">
+        </activity>
+        <activity
+            android:name=".td"
+            android:exported="true"
+            android:label="@string/garage_services">
+        </activity>
+        <activity
+            android:name=".list_requests"
+            android:exported="true"
+            android:label="@string/list_requests">
+        </activity>
+        <activity
+            android:name=".profile"
+            android:exported="true"
+            android:label="@string/profile">
+        </activity>
+        <activity
+            android:name=".list_taxis"
+            android:exported="true"
+            android:label="@string/profile">
+        </activity>
+        <activity
+            android:name=".help_center"
+            android:exported="true"
+            android:label="@string/Help_center">
+        </activity>
+        <activity
+            android:name=".tryy"
+            android:exported="true"
+            android:label="@string/Help_center">
+        </activity>
+        <activity
+            android:name=".menu"
+            android:exported="true"
+            android:label="@string/home">
+        </activity>
+        <activity
+            android:name=".home"
+            android:exported="true"
+            android:label="@string/garage_services">
+        </activity>
+        <activity
+            android:name=".list_tows"
+            android:exported="true"
+            android:label="@string/home">
+        </activity>
+        <activity
+            android:name=".list_vehicle"
+            android:exported="true"
+            android:label="@string/home">
+        </activity>
+        <activity
+            android:name=".list_requests_worker"
+            android:exported="true"
+            android:label="@string/home">
+        </activity>
+        <service android:name=".push"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGIN_EVENT"/>
+            </intent-filter>
+        </service>
+        <activity
+            android:name=".messaging"
+            android:exported="true"
+            android:label="@string/home">
+        </activity>
+        <activity
+            android:name=".request"
+            android:exported="true"
+            android:label="@string/home">
+        </activity>
+        <activity
+            android:name=".adapter_mechanics"
+            android:exported="true"
+            android:label="@string/home">
+        </activity>
+        <activity
+            android:name=".list_garage"
+            android:exported="true"
+            android:label="@string/home">
+        </activity>
+        <activity
+            android:name=".list_stations"
+            android:exported="true"
+            android:label="@string/home">
+        </activity>
+        <activity
+            android:name=".sign_in"
+            android:exported="true"
+            android:label="@string/home">
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/biegish"
+    tools:context=".home">
+        <fragment
+            android:id="@+id/mapFragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <Button
+        android:id="@+id/accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accept"
+        android:background="@drawable/style_button"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="100dp"/>
+    <Button
+        android:id="@+id/refuse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refuse"
+        android:background="@drawable/style_button"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="100dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:background="@color/blueish"
+        android:elevation="4dp"
+        android:translationZ="2dp"
+        android:layout_gravity="bottom"
+        android:gravity="center">
+            <Button
+                android:id="@+id/list_requests"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="left"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:background="@drawable/history"/>
+            <Button
+                android:id="@+id/profile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:layout_marginEnd="60dp"
+                android:clickable="false"
+                android:background="@drawable/user"/>
+    </LinearLayout>
+
+</FrameLayout>

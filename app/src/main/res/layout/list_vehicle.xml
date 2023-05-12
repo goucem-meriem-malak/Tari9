@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/background"
+    tools:context=".list_vehicle">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        style="@style/header">
+
+        <Button
+            android:id="@+id/goback"
+            style="@style/go_back"/>
+
+        <TextView
+            style="@style/text_page_title"
+            android:text="@string/vehicle"/>
+        <Button
+            android:id="@+id/settings"
+            style="@style/help_center"
+            android:background="@drawable/settings"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        style="@style/body">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_vehicle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/next_veh"
+            style="@style/next_vehicle"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text="..."
+            android:textColor="@color/quantum_grey"
+            android:textSize="50sp"
+            android:layout_marginBottom="15dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        style="@style/footer">
+        <Button
+            android:id="@+id/home"
+            style="@style/home"/>
+        <Button
+            android:id="@+id/list_requests"
+            style="@style/History"/>
+        <Button
+            android:id="@+id/profile"
+            style="@style/profile"/>
+    </RelativeLayout>
+
+</RelativeLayout>

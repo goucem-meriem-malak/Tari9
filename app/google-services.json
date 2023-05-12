@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "592550347725",
+    "project_id": "tari9-7d45e",
+    "storage_bucket": "tari9-7d45e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592550347725:android:d3be9772b14c29bbdeba84",
+        "android_client_info": {
+          "package_name": "com.example.tari9"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592550347725-rohqomen5aegguagf8ai5dqjokvgpa16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdf6T4a09rsFpRzkQ1DdjMqSB-7Ov2Tdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592550347725-rohqomen5aegguagf8ai5dqjokvgpa16.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

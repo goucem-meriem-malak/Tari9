@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--_______________background__________________________________-->
+
+    <style name="background_sign_in">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> match_parent </item>
+        <item name="android:background">@color/light_beige</item>
+        <item name="android:gravity"> center </item>
+        <item name="android:padding"> 30dp </item>
+    </style>
+    <style name="background">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> match_parent </item>
+        <item name="android:orientation"> vertical </item>
+        <item name="android:background">@color/light_beige</item>
+    </style>
+    <style name="background_dark_mode">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> match_parent </item>
+        <item name="android:orientation"> vertical </item>
+        <item name="android:background">@color/teal_200</item>
+    </style>
+    <style name="background_profile">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> match_parent </item>
+        <item name="android:background">@drawable/profile_background</item>
+    </style>
+    <!--_______________Text__________________________________-->
+    <style name="small_text">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o"> 18dp </item>
+        <item name="android:layout_marginBottom"> 8dp </item>
+        <item name="android:layout_marginTop"> 12dp </item>
+    </style>
+    <style name="small_text_all">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:padding"> 10dp </item>
+        <item name="android:textSize"> 14sp </item>
+        <item name="android:textAllCaps"> true </item>
+        <item name="android:textStyle"> bold </item>
+        <item name="android:shadowRadius"> 4 </item>
+        <item name="android:shadowDy"> 2 </item>
+        <item name="android:shadowDx"> 2 </item>
+        <item name="android:gravity"> center_horizontal </item>
+        <item name="android:layout_gravity"> center_horizontal </item>
+        <item name="android:shadowColor"> #52000000 </item>
+    </style>
+    <style name="small_small_text">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:padding"> 10dp </item>
+        <item name="android:textSize"> 12sp </item>
+        <item name="android:textAllCaps"> true </item>
+        <item name="android:shadowRadius"> 4 </item>
+        <item name="android:shadowDy"> 2 </item>
+        <item name="android:shadowDx"> 2 </item>
+        <item name="android:gravity"> center_horizontal </item>
+        <item name="android:layout_gravity"> center_horizontal </item>
+        <item name="android:shadowColor"> #52000000 </item>
+    </style>
+    <style name="request_text">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:padding"> 10dp </item>
+        <item name="android:textSize"> 12sp </item>
+        <item name="android:textAllCaps"> true </item>
+        <item name="android:shadowRadius"> 4 </item>
+        <item name="android:shadowDy"> 2 </item>
+        <item name="android:shadowDx"> 2 </item>
+        <item name="android:gravity"> left </item>
+        <item name="android:layout_gravity"> left </item>
+        <item name="android:layout_marginLeft"> 10dp </item>
+        <item name="android:shadowColor"> #52000000 </item>
+    </style>
+    <style name="huge_text">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o"> 30dp </item>
+        <item name="android:layout_marginBottom"> 12dp </item>
+        <item name="android:layout_marginTop"> 12dp </item>
+        <item name="android:gravity"> start </item>
+        <item name="android:textSize"> 38sp </item>
+        <item name="android:color"> @color/blueish </item>
+    </style>
+    <style name="link_text">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:textColor"> @color/yellowish </item>
+        <item name="android:textStyle"> bold </item>
+        <item name="android:clickable"> true </item>
+        <item name="android:textSize"> 14sp </item>
+        <item name="android:gravity"> center</item>
+        <item name="android:layout_gravity"> center </item>
+    </style>
+    <style name="text_page_title">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_gravity"> center </item>
+        <item name="android:gravity"> center </item>
+        <item name="android:layout_centerInParent"> true </item>
+        <item name="android:fontFamily"> sans-serif-condensed-light </item>
+        <item name="android:textSize"> 35sp </item>
+        <item name="android:shadowColor"> @color/black </item>
+        <item name="android:shadowDx"> 2 </item>
+        <item name="android:shadowDy"> 2 </item>
+        <item name="android:shadowRadius"> 4 </item>
+    </style>
+    <style name="text_page_title_profile">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_gravity"> center </item>
+        <item name="android:gravity"> center </item>
+        <item name="android:layout_centerInParent"> true </item>
+        <item name="android:fontFamily"> sans-serif-condensed-light </item>
+        <item name="android:textSize"> 35sp </item>
+        <item name="android:textColor"> #FFEFCD </item>
+        <item name="android:shadowColor"> #FFEFCD </item>
+        <item name="android:shadowDx"> 1 </item>
+        <item name="android:shadowDy"> 1 </item>
+        <item name="android:shadowRadius"> 4 </item>
+    </style>
+    <style name="help_center_text">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:fontFamily"> sans-serif-condensed-light </item>
+        <item name="android:textSize"> 20sp </item>
+        <item name="android:textColor"> @color/grayish </item>
+        <item name="android:shadowColor"> #FFEFCD </item>
+        <item name="android:shadowDx"> 1 </item>
+        <item name="android:shadowDy"> 1 </item>
+        <item name="android:shadowRadius"> 4 </item>
+    </style>
+    <style name="help_center_text_small">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:fontFamily"> sans-serif-condensed-light </item>
+        <item name="android:textSize"> 15sp </item>
+        <item name="android:textColor"> @color/white </item>
+        <item name="android:shadowColor"> #FFEFCD </item>
+        <item name="android:shadowDx"> 1 </item>
+        <item name="android:shadowDy"> 1 </item>
+        <item name="android:shadowRadius"> 4 </item>
+    </style>
+    <style name="help_center_text_title">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_margin"> 22dp </item>
+        <item name="android:textColor"> @color/grayish </item>
+        <item name="android:textSize"> 25sp </item>
+    </style>
+    <style name="appname">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:background"> @drawable/new_name </item>
+        <item name="android:tint"> @color/biegish </item>
+        <item name="android:maxHeight"> 50dp </item>
+        <item name="android:maxWidth"> 90dp </item>
+    </style>
+    <!--_______________button__________________________________-->
+    <style name="button_sign_in">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_marginVertical" tools:targetApi="o"> 12dp </item>
+        <item name="android:paddingVertical" tools:targetApi="o"> 16dp </item>
+        <item name="android:layout_marginTop"> 12dp </item>
+        <item name="android:padding"> 14dp </item>
+        <item name="android:textColor"> @color/white </item>
+        <item name="android:background">@drawable/style_button</item>
+    </style>
+    <style name="settings">
+        <item name="android:layout_width"> 30dp </item>
+        <item name="android:layout_height"> 30dp </item>
+        <item name="android:layout_gravity"> center </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:layout_alignParentEnd"> true </item>
+        <item name="android:background"> @drawable/settings </item>
+    </style>
+    <style name="settings_clicked">
+        <item name="android:layout_width"> 30dp </item>
+        <item name="android:layout_height"> 30dp </item>
+        <item name="android:layout_gravity"> center </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:layout_alignParentEnd"> true </item>
+        <item name="android:background"> @drawable/settings </item>
+        <item name="android:backgroundTint"> @color/quantum_lightblue </item>
+    </style>
+    <style name="help_center">
+        <item name="android:layout_width"> 30dp </item>
+        <item name="android:layout_height"> 30dp </item>
+        <item name="android:layout_gravity"> center </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:layout_alignParentEnd"> true </item>
+        <item name="android:background">@drawable/help_center</item>
+    </style>
+    <style name="go_back">
+        <item name="android:layout_width"> 30dp </item>
+        <item name="android:layout_height"> 30dp </item>
+        <item name="android:layout_gravity"> center </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:layout_alignParentStart"> true </item>
+        <item name="android:background"> @drawable/left </item>
+    </style>
+    <style name="home">
+        <item name="android:layout_width"> 30dp </item>
+        <item name="android:layout_height"> 30dp </item>
+        <item name="android:layout_marginLeft"> 70dp </item>
+        <item name="android:layout_alignParentStart"> true </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:background"> @drawable/home </item>
+    </style>
+    <style name="home_clicked">
+        <item name="android:layout_width"> 30dp </item>
+        <item name="android:layout_height"> 30dp </item>
+        <item name="android:layout_marginLeft"> 70dp </item>
+        <item name="android:layout_alignParentStart"> true </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:background"> @drawable/home </item>
+        <item name="android:backgroundTint"> @color/quantum_lightblue </item>
+    </style>
+    <style name="History">
+        <item name="android:layout_width"> 30dp </item>
+        <item name="android:layout_height"> 30dp </item>
+        <item name="android:layout_centerHorizontal"> true </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:background"> @drawable/history </item>
+    </style>
+    <style name="profile">
+        <item name="android:layout_width"> 30dp </item>
+        <item name="android:layout_height"> 30dp </item>
+        <item name="android:layout_marginRight"> 70dp </item>
+        <item name="android:layout_alignParentEnd"> true </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:clickable"> false </item>
+        <item name="android:background">@drawable/user</item>
+    </style>
+    <style name="next_vehicle">
+        <item name="android:layout_width"> 30dp </item>
+        <item name="android:layout_height"> 30dp </item>
+        <item name="android:layout_marginEnd"> 15dp </item>
+        <item name="android:layout_alignParentEnd"> true </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:background"> @drawable/next </item>
+    </style>
+    <style name="service_buttons">
+        <item name="android:layout_width"> 50dp </item>
+        <item name="android:layout_height"> 50dp </item>
+        <item name="android:layout_gravity"> center_horizontal </item>
+    </style>
+    <style name="chat">
+        <item name="android:layout_width"> 50dp </item>
+        <item name="android:layout_height"> 50dp </item>
+        <item name="android:layout_marginTop"> 28dp </item>
+        <item name="android:layout_gravity"> center_horizontal </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:background"> @drawable/chat </item>
+        <item name="android:tint"> @color/yellowish </item>
+    </style>
+    <style name="call">
+        <item name="android:layout_width"> 50dp </item>
+        <item name="android:layout_height"> 50dp </item>
+        <item name="android:layout_marginTop"> 28dp </item>
+        <item name="android:layout_gravity"> center_horizontal </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:background"> @drawable/call </item>
+        <item name="android:tint"> @color/yellowish </item>
+    </style>
+    <style name="faq">
+        <item name="android:layout_width"> 50dp </item>
+        <item name="android:layout_height"> 50dp </item>
+        <item name="android:layout_marginTop"> 28dp </item>
+        <item name="android:layout_gravity"> center_horizontal </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:background"> @drawable/faq </item>
+        <item name="android:tint"> @color/yellowish </item>
+    </style>
+    <style name="messenger">
+        <item name="android:layout_width"> 50dp </item>
+        <item name="android:layout_height"> 50dp </item>
+        <item name="android:layout_marginTop"> 28dp </item>
+        <item name="android:layout_gravity"> center_horizontal </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:background"> @drawable/messenger </item>
+        <item name="android:tint"> @color/yellowish </item>
+    </style>
+    <style name="instagram">
+        <item name="android:layout_width"> 50dp </item>
+        <item name="android:layout_height"> 50dp </item>
+        <item name="android:layout_marginTop"> 28dp </item>
+        <item name="android:layout_gravity"> center_horizontal </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:background"> @drawable/instagram </item>
+        <item name="android:tint"> @color/yellowish </item>
+    </style>
+    <style name="whatsapp">
+        <item name="android:layout_width"> 50dp </item>
+        <item name="android:layout_height"> 50dp </item>
+        <item name="android:layout_marginTop"> 28dp </item>
+        <item name="android:layout_gravity"> center_horizontal </item>
+        <item name="android:layout_centerVertical"> true </item>
+        <item name="android:background"> @drawable/whatsapp </item>
+        <item name="android:tint"> @color/yellowish </item>
+    </style>
+    <style name="normal_button">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_margin"> 10dp </item>
+        <item name="android:layout_centerHorizontal"> true </item>
+        <item name="android:color"> @color/white </item>
+        <item name="android:background"> @drawable/style_button </item>
+    </style>
+    <!--_______________Edit text__________________________________-->
+    <style name="style_edit_text">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:textColor"> @color/black </item>
+        <item name="android:gravity"> center </item>
+        <item name="android:padding"> 14dp </item>
+        <item name="android:background">@drawable/style_text_edit</item>
+    </style>
+    <style name="description">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:textColor"> @color/black </item>
+        <item name="android:gravity"> left </item>
+        <item name="android:padding"> 14dp </item>
+        <item name="android:background">@drawable/style_description</item>
+    </style>
+    <!--_______________parts__________________________________-->
+    <style name="header">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_gravity"> top </item>
+        <item name="android:layout_alignParentTop"> true </item>
+        <item name="android:orientation"> horizontal </item>
+        <item name="android:padding"> 12dp </item>
+    </style>
+    <style name="header_help_center">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_gravity"> top </item>
+        <item name="android:layout_alignParentTop"> true </item>
+        <item name="android:orientation"> horizontal </item>
+        <item name="android:padding"> 12dp </item>
+    </style>
+    <style name="body">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> 0dp </item>
+        <item name="android:layout_above"> @id/footer </item>
+        <item name="android:layout_below"> @id/header </item>
+        <item name="android:layout_gravity"> center </item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o"> 15dp </item>
+        <item name="android:gravity"> center </item>
+    </style>
+    <style name="footer">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_gravity"> bottom </item>
+        <item name="android:layout_alignParentBottom"> true </item>
+        <item name="android:orientation"> horizontal </item>
+        <item name="android:padding"> 12dp </item>
+        <item name="android:background"> @color/blueish </item>
+    </style>
+    <style name="request">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> 0dp </item>
+        <item name="android:layout_above"> @id/footer </item>
+        <item name="android:layout_below"> @id/header </item>
+        <item name="android:layout_gravity"> left </item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o"> 15dp </item>
+        <item name="android:gravity"> left </item>
+        <item name="android:elevation"> 2dp </item>
+        <item name="android:translationZ"> 2dp </item>
+        <item name="android:padding"> 30dp </item>
+        <item name="android:background"> @drawable/style_constraint </item>
+    </style>
+    <style name="constraint">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_gravity"> bottom </item>
+        <item name="android:background">@drawable/style_constraint</item>
+        <item name="android:orientation"> vertical </item>
+        <item name="android:elevation"> 2dp </item>
+        <item name="android:translationZ"> 2dp </item>
+        <item name="android:padding"> 30dp </item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o"> 2dp </item>
+    </style>
+</resources>

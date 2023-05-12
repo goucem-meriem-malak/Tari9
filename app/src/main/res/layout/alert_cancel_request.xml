@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="20dp">
+
+    <ImageView
+        android:id="@+id/alert_icon"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/cancel"
+        android:backgroundTint="@color/dark_yellowish"
+        android:padding="10dp"
+        android:contentDescription="icon" />
+
+    <TextView
+        android:id="@+id/alert_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="@string/are_you_sure_you_want_to_cancel_your_request"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:padding="10dp" />
+
+</LinearLayout>

@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Tari9" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/yellowish</item>
+        <item name="colorPrimaryVariant">@color/blueish</item>
+        <item name="colorOnPrimary">@color/grayish</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/grayish</item>
+        <item name="colorSecondaryVariant">@color/biegish_dark</item>
+        <item name="colorOnSecondary">@color/grayish</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>

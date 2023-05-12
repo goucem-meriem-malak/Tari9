@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center_horizontal"
+    android:background="@color/biegish"
+    android:orientation="vertical"
+    tools:context=".list_requests">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/requests"
+            android:layout_marginHorizontal="70dp"
+            android:textSize="35sp"
+            android:layout_weight="10"
+            android:shadowColor="#000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"
+            android:fontFamily="sans-serif-condensed-light"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_request_worker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="22dp"
+        android:layout_weight="1"/>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        style="@style/footer">
+        <Button
+            android:id="@+id/home"
+            style="@style/home"/>
+        <Button
+            android:id="@+id/list_requests"
+            style="@style/History"/>
+        <Button
+            android:id="@+id/profile"
+            style="@style/profile"/>
+    </RelativeLayout>
+
+</LinearLayout>

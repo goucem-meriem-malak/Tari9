@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/background"
+    tools:context=".request">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        style="@style/header">
+
+        <Button
+            android:id="@+id/go_back"
+            style="@style/go_back"/>
+
+        <TextView
+            style="@style/text_page_title"
+            android:text="@string/request"/>
+        <Button
+            android:id="@+id/help_center"
+            style="@style/help_center"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/body"
+        style="@style/request"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_gravity="right"
+                    style="@style/small_text_all"
+                    android:text="@string/requested_"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/type"
+                    style="@style/small_small_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_gravity="right"
+                    style="@style/small_text_all"
+                    android:text="@string/services_"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/service"
+                    style="@style/small_small_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_nbr_passenger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/small_text_all"
+                    android:text="@string/passenger_nbr_"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/nbr_passenger"
+                    style="@style/small_small_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/small_text_all"
+                    android:text="@string/on_"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/date"
+                    style="@style/small_small_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/small_text_all"
+                    android:text="@string/address_"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/address"
+                    style="@style/small_small_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_vehicle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/small_text_all"
+                    android:text="@string/vehicle_"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/vehicle"
+                    style="@style/small_small_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/small_text_all"
+                    android:text="@string/total_"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/price"
+                    style="@style/small_small_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cancel"
+                    style="@style/normal_button"
+                    android:layout_weight="1"
+                    android:text="@string/cancel" />
+
+                <Button
+                    android:id="@+id/confirm"
+                    style="@style/normal_button"
+                    android:layout_weight="1"
+                    android:text="@string/confirm" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/footer"
+        style="@style/footer">
+        <Button
+            android:id="@+id/menu"
+            style="@style/home"/>
+        <Button
+            android:id="@+id/list_requests"
+            style="@style/History"/>
+        <Button
+            android:id="@+id/profile"
+            style="@style/profile"/>
+    </RelativeLayout>
+</RelativeLayout>
