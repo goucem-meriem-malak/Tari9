@@ -53,6 +53,7 @@
                 <TextView
                     android:id="@+id/type"
                     style="@style/small_small_text"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -72,6 +73,7 @@
                 <TextView
                     android:id="@+id/service"
                     style="@style/small_small_text"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -92,6 +94,7 @@
                 <TextView
                     android:id="@+id/nbr_passenger"
                     style="@style/small_small_text"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -112,6 +115,7 @@
                 <TextView
                     android:id="@+id/date"
                     style="@style/small_small_text"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -132,6 +136,7 @@
                 <TextView
                     android:id="@+id/address"
                     style="@style/small_small_text"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -151,6 +156,7 @@
                 <TextView
                     android:id="@+id/vehicle"
                     style="@style/small_small_text"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -171,6 +177,7 @@
                 <TextView
                     android:id="@+id/price"
                     style="@style/small_small_text"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

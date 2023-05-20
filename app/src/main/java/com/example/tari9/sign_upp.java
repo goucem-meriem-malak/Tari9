@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class sign_up extends Activity {
+public class sign_upp extends Activity {
 
     private static final String TAG = "PhoneAuthActivity";
     private FirebaseFirestore db;
@@ -146,23 +146,23 @@ public class sign_up extends Activity {
                             startPhoneNumberVerification(nbr_phone);
                         }
                         else {
-                            Toast.makeText(sign_up.this, "Verify your phone number",Toast.LENGTH_LONG).show();
+                            Toast.makeText(sign_upp.this, "Verify your phone number",Toast.LENGTH_LONG).show();
                         }
                     }
                     else {
-                        Toast.makeText(sign_up.this, "Verify country code",Toast.LENGTH_LONG).show();
+                        Toast.makeText(sign_upp.this, "Verify country code",Toast.LENGTH_LONG).show();
                     }
                 }
                 else {
-                    Toast.makeText(sign_up.this,"A field id empty",Toast.LENGTH_LONG).show();
+                    Toast.makeText(sign_upp.this,"A field id empty",Toast.LENGTH_LONG).show();
                 }
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(sign_up.this, first_screen.class);
-                sign_up.this.startActivity(intent);
+                Intent intent = new Intent(sign_upp.this, sign_in.class);
+                sign_upp.this.startActivity(intent);
                 finish();
             }
         });
@@ -189,7 +189,7 @@ public class sign_up extends Activity {
                     verifyPhoneNumberWithCode(mVerificationId, code.getText().toString());
                 }
                 else {
-                    Toast.makeText(sign_up.this, "Verify your code",Toast.LENGTH_LONG).show();
+                    Toast.makeText(sign_upp.this, "Verify your code",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -229,7 +229,7 @@ public class sign_up extends Activity {
     }
 
     private void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) sign_up.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) sign_upp.this.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(phone.getWindowToken(), 0);
     }
 
@@ -277,13 +277,13 @@ public class sign_up extends Activity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             create_client(auth.getUid(), first_name, last_name, nbr_phone);
-                            Intent in = new Intent(sign_up.this, menu.class);
-                            sign_up.this.startActivity(in);
+                            Intent in = new Intent(sign_upp.this, menu.class);
+                            sign_upp.this.startActivity(in);
                             finish();
                         }
                     }
                 });
-            }
+    }
 
     private void create_client(String id, String first_name, String last_name, String phone) {
         FirebaseMessaging.getInstance().getToken()

@@ -15,7 +15,7 @@
 
         <TextView
             style="@style/text_page_title"
-            android:text="@string/request"/>
+            android:text="@string/list_requestss"/>
         <Button
             android:id="@+id/help_center"
             style="@style/help_center"/>
@@ -31,7 +31,9 @@
         style="@style/footer">
         <Button
             android:id="@+id/home"
-            style="@style/home"/>
+            style="@style/home_clicked"
+            android:backgroundTint="@color/teal_200"
+            android:foregroundTint="@color/teal_200"/>
         <Button
             android:id="@+id/list_requests"
             style="@style/History"/>

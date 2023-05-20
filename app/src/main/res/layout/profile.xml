@@ -17,9 +17,9 @@
             style="@style/text_page_title_profile"
             android:text="@string/profile"/>
         <Button
-            android:id="@+id/settings"
-            style="@style/settings"
-            android:background="@drawable/settings"/>
+            android:id="@+id/help_center"
+            style="@style/help_center"
+            android:background="@drawable/help_center"/>
 
     </RelativeLayout>
 

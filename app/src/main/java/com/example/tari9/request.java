@@ -41,7 +41,7 @@ public class request extends AppCompatActivity implements ActivityCompat.OnReque
     private TextView type, service, nbr_passenger, date, address, vehicle, price;
     private LinearLayout ll_type, ll_service, ll_nbr_passenger, ll_date, ll_address, ll_vehicle, ll_price;
     private get_requests request, request1, request2;
-    private int passenger_nbr;
+    private int passenger_nbr, taxi_price, ambulance_price;
     private String client_id, request_id, request_taxi_id, request_ambulance_id, worker_id, worker_phone;
     private Button btnconfirm, btncancel, btnmenu, btnlistrequests, btnprofile, btngoback, btnhelpcenter;
 
@@ -99,6 +99,27 @@ public class request extends AppCompatActivity implements ActivityCompat.OnReque
         }
         get_request_info(request_id);
 
+        btngoback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (request_id!=null){
+                    db.collection("request").document(request_id).delete();
+                    if (getIntent().getStringExtra("request_taxi_id")!=null){
+                        db.collection("request").document(getIntent().getStringExtra("request_taxi_id")).delete();
+                    }
+                    if (getIntent().getStringExtra("request_ambulance")!=null){
+                        db.collection("request").document(getIntent().getStringExtra("request_ambulance_id")).delete();
+                    }
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
         btnconfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,12 +240,12 @@ public class request extends AppCompatActivity implements ActivityCompat.OnReque
                             } else if (request.getType().equals("station")){
                                 if (request.isFuel() && request.isOil()){
                                     ll_service.setVisibility(View.VISIBLE);
-                                    service.setText("Fuel: " + request.getFuel_type() + " " + request.getFuel_quantity() + " " + request.getFuel_unit()
-                                            +" & Oil: " + request.getOil_type() + " " + request.getOil_quantity() + " " + request.getOil_unit());
+                                    service.setText("Fuel: " + request.getFuel_type() + " " + request.getFuel_quantity()
+                                            +" & Oil: " + request.getOil_type() + " " + request.getOil_quantity() );
                                 } else if (request.isFuel() && !request.isOil()){
-                                    service.setText("Fuel: " + request.getFuel_type() + " " + request.getFuel_quantity() + " " + request.getFuel_unit());
+                                    service.setText("Fuel: " + request.getFuel_type() + " " + request.getFuel_quantity());
                                 } else if (!request.isFuel() && request.isOil()){
-                                    service.setText("Oil: " + request.getOil_type() + " " + request.getOil_quantity() + " " + request.getOil_unit());
+                                    service.setText("Oil: " + request.getOil_type() + " " + request.getOil_quantity());
                                 } else {
                                     ll_service.setVisibility(View.GONE);
                                 }
@@ -292,6 +313,7 @@ public class request extends AppCompatActivity implements ActivityCompat.OnReque
                         ll_nbr_passenger.setVisibility(View.VISIBLE);
                         if (String.valueOf(request1.getPassenger_number())!=null){
                             nbr_passenger.setText(String.valueOf(request1.getPassenger_number()));
+                            //price.setText((Integer.parseInt(price.getText().toString()))+Integer.parseInt(request1.getPrice()));
                         }
                     }
                 }

@@ -37,6 +37,7 @@ public class adapter_tow extends RecyclerView.Adapter<adapter_tow.myviewholder> 
     public void onBindViewHolder(@NonNull myviewholder holder, int position) {
         holder.id.setText(tows.get(position).getId());
         holder.firstname.setText(tows.get(position).getFirstname());
+        holder.lastname.setText(tows.get(position).getLastname());
         holder.distance.setText(String.valueOf(tows.get(position).getDistance()));
         holder.dunit.setText(tows.get(position).getDunit());
         holder.itemView.setOnClickListener(new View.OnClickListener() {

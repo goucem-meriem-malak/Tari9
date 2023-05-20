@@ -60,6 +60,16 @@
             android:exported="true"
             android:label="@string/sign_up">
         </activity>
+        <activity
+            android:name=".first_screen"
+            android:exported="true"
+            android:label="@string/sign_up">
+        </activity>
+        <activity
+            android:name=".sign_up"
+            android:exported="true"
+            android:label="@string/sign_up">
+        </activity>
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">
@@ -84,7 +94,7 @@
             android:label="@string/sign_in">
         </activity>
         <activity
-            android:name=".sign_up"
+            android:name=".sign_upp"
             android:exported="true"
             android:label="@string/sign_in">
         </activity>

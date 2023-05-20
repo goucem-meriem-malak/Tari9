@@ -107,12 +107,22 @@ public class list_ambulance extends AppCompatActivity implements listener_ambula
         btngoback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //      if (requestid!=null){
-                //          db.collection("request").document(requestid).delete();
-                //          finish();
-                //     } else {
-                finish();
-                //     }
+                if (requestid!=null){
+                    db.collection("request").document(requestid).delete();
+                    if (getIntent().getStringExtra("request_taxi_id")!=null){
+                        db.collection("request").document(getIntent().getStringExtra("request_taxi_id")).delete();
+                    }
+                    if (getIntent().getStringExtra("request_tow_id")!=null){
+                        db.collection("request").document(getIntent().getStringExtra("request_tow_id")).delete();
+                    }
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         btnhelpcenter.setOnClickListener(new View.OnClickListener() {
@@ -129,8 +139,8 @@ public class list_ambulance extends AppCompatActivity implements listener_ambula
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshott) {
                 client client = documentSnapshott.toObject(client.class);
-                //.whereEqualTo("address", client.getLocation_address())
-                db.collection("ambulance")
+
+                db.collection("ambulance").whereEqualTo("address", client.getLocation_address())
                         .addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
@@ -243,8 +253,19 @@ public class list_ambulance extends AppCompatActivity implements listener_ambula
     public void onBackPressed() {
         super.onBackPressed();
         if (requestid!=null){
+            db.collection("request").document(requestid).delete();
+            if (getIntent().getStringExtra("request_taxi_id")!=null){
+                db.collection("request").document(getIntent().getStringExtra("request_taxi_id")).delete();
+            }
+            if (getIntent().getStringExtra("request_tow_id")!=null){
+                db.collection("request").document(getIntent().getStringExtra("request_tow_id")).delete();
+            }
+            Intent intent = new Intent(getApplicationContext(), menu.class);
+            startActivity(intent);
             finish();
         } else {
+            Intent intent = new Intent(getApplicationContext(), menu.class);
+            startActivity(intent);
             finish();
         }
     }

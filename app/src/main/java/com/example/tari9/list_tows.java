@@ -117,8 +117,18 @@ public class list_tows extends AppCompatActivity implements listener_tow {
             public void onClick(View v) {
                 if (requestid!=null){
                     db.collection("request").document(requestid).delete();
+                    if (getIntent().getStringExtra("request_taxi_id")!=null){
+                        db.collection("request").document(getIntent().getStringExtra("request_taxi_id")).delete();
+                    }
+                    if (getIntent().getStringExtra("request_ambulance_id")!=null){
+                        db.collection("request").document(getIntent().getStringExtra("request_ambulance_id")).delete();
+                    }
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    startActivity(intent);
                     finish();
                 } else {
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    startActivity(intent);
                     finish();
                 }
             }
@@ -138,8 +148,7 @@ public class list_tows extends AppCompatActivity implements listener_tow {
             public void onSuccess(DocumentSnapshot documentSnapshott) {
                 client client = documentSnapshott.toObject(client.class);
                 client_location = client.getLocation();
-                //.whereEqualTo("address", client.getLocation_address())
-                db.collection("tow")
+                db.collection("tow").whereEqualTo("address", client.getLocation_address())
                         .addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -251,8 +260,18 @@ public class list_tows extends AppCompatActivity implements listener_tow {
         super.onBackPressed();
         if (requestid!=null){
             db.collection("request").document(requestid).delete();
+            if (getIntent().getStringExtra("request_taxi_id")!=null){
+                db.collection("request").document(getIntent().getStringExtra("request_taxi_id")).delete();
+            }
+            if (getIntent().getStringExtra("request_ambulance_id")!=null){
+                db.collection("request").document(getIntent().getStringExtra("request_ambulance_id")).delete();
+            }
+            Intent intent = new Intent(getApplicationContext(), menu.class);
+            startActivity(intent);
             finish();
         } else {
+            Intent intent = new Intent(getApplicationContext(), menu.class);
+            startActivity(intent);
             finish();
         }
     }

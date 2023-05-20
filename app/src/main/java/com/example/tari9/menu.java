@@ -56,7 +56,7 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
             stationcheckbox;
     private CheckBox fuel, oil, taxi, ambulance;
     private Spinner mech_veh_type, mech_veh_mark, tow_veh_type, tow_veh_mark,
-            oil_type, oil_unit, fuel_type, fuel_unit, team_service_type;
+            oil_type, fuel_type, team_service_type;
     private TextView qoil, qfuel, addoil, addfuel, daddfuel, daddoil;
     private TextView fprice, oprice;
     private TextView taxi_number_passenger, add, dadd;
@@ -151,6 +151,9 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
             @Override
             public void onClick(View v) {
                 qfuel.setText(String.valueOf(Integer.parseInt(qfuel.getText().toString())+1));
+                if (qfuel!=null){
+                    fprice.setText(Integer.valueOf(qfuel.getText().toString())*45 + "DA");
+                }
             }
         });
         daddfuel.setOnClickListener(new View.OnClickListener() {
@@ -158,6 +161,9 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
             public void onClick(View v) {
                 if (Integer.parseInt(qfuel.getText().toString())!=0){
                     qfuel.setText(String.valueOf(Integer.parseInt(qfuel.getText().toString())-1));
+                    if (qfuel!=null){
+                        fprice.setText(Integer.valueOf(qfuel.getText().toString())*45 + "DA");
+                    }
                 }
             }
         });
@@ -165,6 +171,9 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
             @Override
             public void onClick(View v) {
                 qoil.setText(String.valueOf(Integer.parseInt(qoil.getText().toString())+1));
+                if (qoil!=null){
+                    oprice.setText(Integer.parseInt(String.valueOf(qoil.getText()))*420 + "DA");
+                }
             }
         });
         daddoil.setOnClickListener(new View.OnClickListener() {
@@ -172,16 +181,14 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
             public void onClick(View v) {
                 if (Integer.parseInt(qoil.getText().toString())!=0){
                     qoil.setText(String.valueOf(Integer.parseInt(qoil.getText().toString())-1));
+                    if (qoil!=null){
+                        oprice.setText(Integer.parseInt(String.valueOf(qoil.getText()))*420 + "DA");
+                    }
                 }
             }
         });
         fprice = findViewById(R.id.fuel_price);
         oprice = findViewById(R.id.oil_price);
-        oil_unit = findViewById(R.id.oil_unit);
-        oil_unit.setOnItemSelectedListener(this);
-        fuel_unit = findViewById(R.id.fuel_unit);
-        fuel_unit.setOnItemSelectedListener(this);
-
         mech_veh_type = findViewById(R.id.mech_veh_type);
         mech_veh_type.setOnItemSelectedListener(this);
         mech_veh_mark = findViewById(R.id.mech_veh_mark);
@@ -192,12 +199,8 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
         tow_veh_mark.setOnItemSelectedListener(this);
         oil_type = findViewById(R.id.oil_type);
         oil_type.setOnItemSelectedListener(this);
-        oil_unit = findViewById(R.id.oil_unit);
-        oil_unit.setOnItemSelectedListener(this);
         fuel_type = findViewById(R.id.fuel_type);
         fuel_type.setOnItemSelectedListener(this);
-        fuel_unit = findViewById(R.id.fuel_unit);
-        fuel_unit.setOnItemSelectedListener(this);
         team_service_type = findViewById(R.id.service_type);
         team_service_type.setOnItemSelectedListener(this);
 
@@ -267,33 +270,9 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
 
         oil_units = new ArrayAdapter<String>(menu.this, android.R.layout.simple_spinner_item, units);
         oil_units.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        oil_unit.setAdapter(oil_units);
-        oil_unit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                oil_unitt = oil_unit.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                oil_unitt = oil_unit.getSelectedItem().toString();
-            }
-        });
 
         fuel_units = new ArrayAdapter<String>(menu.this, android.R.layout.simple_spinner_item, units);
         fuel_units.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        fuel_unit.setAdapter(fuel_units);
-        fuel_unit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                fuel_unitt = fuel_unit.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                fuel_unitt = fuel_unit.getSelectedItem().toString();
-            }
-        });
 
         oil_types = new ArrayAdapter<String>(menu.this, android.R.layout.simple_spinner_item, oiltype);
         oil_types.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -609,7 +588,7 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
         m.put("date", Calendar.getInstance().getTime());
         m.put("type", "mechanic");
         m.put("vehicle", vehicle);
-        if (desc_mech!=null){
+        if (!desc_mech.getText().toString().isEmpty()){
             m.put("description", desc_mech.getText().toString());
         }
         db.collection("request").document(request_mechanic_id).set(m);
@@ -626,7 +605,7 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
         m.put("date", Calendar.getInstance().getTime());
         m.put("type", "tow");
         m.put("vehicle", veh);
-        if (desc_tow!=null){
+        if (!desc_tow.getText().toString().isEmpty()){
             m.put("description", desc_tow.getText().toString());
         }
         db.collection("request").document(request_tow_id).set(m);
@@ -638,7 +617,7 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
         n.put("client_id", clientid);
         n.put("date", Calendar.getInstance().getTime());
         n.put("type", "ambulance");
-        if (desc_tow!=null){
+        if (!desc_tow.getText().toString().isEmpty()){
             n.put("description", desc_tow.getText().toString());
         }
         db.collection("request").document(request_ambulance_id).set(n);
@@ -655,7 +634,7 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
             n.put("passenger_number", Integer.parseInt(taxi_number_passenger.getText().toString()));
         }
 
-        if (desc_tow!=null){
+        if (!desc_tow.getText().toString().isEmpty()){
             n.put("description", desc_tow.getText().toString());
         }
         db.collection("request").document(request_taxi_id).set(n);
@@ -670,17 +649,21 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
             m.put("type", "station");
             m.put("fuel", true);
             m.put("fuel_type", fuel_typee);
-            m.put("fuel_quantity", fuelquantity);
-            m.put("fuel_unit", fuel_unitt);
+            m.put("fuel_quantity", Integer.parseInt(qfuel.getText().toString()));
             m.put("oil", true);
             m.put("oil_type", oil_typee);
-            m.put("oil_quantity", oilquantity);
-            m.put("oil_unit", oil_unitt);
-            if (desc_station!=null){
+            m.put("oil_quantity", Integer.parseInt(qoil.getText().toString()));
+            m.put("price", Integer.parseInt(qoil.getText().toString())*420 + Integer.parseInt(qfuel.getText().toString())*45);
+            if (qoil!=null){
+                oprice.setText(String.valueOf(oilquantity*420) + "DA");
+            } if (qfuel!=null){
+                fprice.setText(String.valueOf(fuelquantity*45) + "DA");
+            }
+            if (!desc_station.getText().toString().isEmpty()){
                 m.put("description", desc_station.getText().toString());
             }
             db.collection("request").document(request_station_id).set(m);
-        } else if (oil.isChecked()) {
+        } else if (oil.isChecked()&&!fuel.isChecked()) {
             HashMap<String, Object> m = new HashMap<String, Object>();
 
             m.put("id", request_station_id);
@@ -690,13 +673,16 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
             m.put("fuel", false);
             m.put("oil", true);
             m.put("oil_type", oil_typee);
-            m.put("oil_quantity", oilquantity);
-            m.put("oil_unit", oil_unitt);
-            if (desc_station!=null){
+            m.put("oil_quantity", Integer.parseInt(qoil.getText().toString()));
+            m.put("price", Integer.parseInt(qoil.getText().toString())*420);
+            if (qoil!=null){
+                oprice.setText(Integer.parseInt(qoil.getText().toString())*420 + "DA");
+            }
+            if (!desc_station.getText().toString().isEmpty()){
                 m.put("description", desc_station.getText().toString());
             }
             db.collection("request").document(request_station_id).set(m);
-        } else if (fuel.isChecked()) {
+        } else if (fuel.isChecked()&& !oil.isChecked()) {
             HashMap<String, Object> m = new HashMap<String, Object>();
             m.put("id", request_station_id);
             m.put("client_id", clientid);
@@ -705,9 +691,12 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
             m.put("fuel", true);
             m.put("oil", false);
             m.put("fuel_type", fuel_typee);
-            m.put("fuel_quantity", fuelquantity);
-            m.put("fuel_unit", fuel_unitt);
-            if (desc_station != null) {
+            m.put("fuel_quantity", Integer.parseInt(qfuel.getText().toString()));
+            m.put("price", Integer.parseInt(qfuel.getText().toString())*45);
+            if (qfuel!=null){
+                fprice.setText(Integer.valueOf(qfuel.getText().toString())*45 + "DA");
+            }
+            if (!desc_station.getText().toString().isEmpty()) {
                 m.put("description", desc_station.getText().toString());
             }
             db.collection("request").document(request_station_id).set(m);
@@ -722,6 +711,9 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
         m.put("date", Calendar.getInstance().getTime());
         m.put("type", "team");
         m.put("service", team_service_typee);
+        if (!desc_team.getText().toString().isEmpty()){
+            m.put("description", desc_team.getText().toString());
+        }
         db.collection("request").document(request_team_id).set(m);
     }
     public void get_mech_veh() {

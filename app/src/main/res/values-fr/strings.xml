@@ -65,7 +65,6 @@
     <string name="requests">Requests</string>
     <string name="fastrep">Fastrep</string>
     <string name="garage">Garage</string>
-    <string name="Fixper">Fixper</string>
     <string name="your_address">Your Address:</string>
     <string name="price">Price:</string>
     <string name="statee">State:</string>
@@ -120,4 +119,18 @@
     <string name="are_you_sure_you_want_to_cancel_your_request">Are You Sure You Want To Cancel Your Request?</string>
     <string name="you_want_to_add_this_vehicle_to_your_collection">You want to add this vehicle to your collection?</string>
     <string name="join_us_on_facebook">Join Us On Facebook</string>
+    <string name="phone_number_">Pone Number:</string>
+    <string name="requested_">Requested:</string>
+    <string name="services_">Services:</string>
+    <string name="on_">On:</string>
+    <string name="address_">Address:</string>
+    <string name="vehicle_">Vehicle:</string>
+    <string name="total_">Total:</string>
+    <string name="passenger_nbr_">Passenger Number:</string>
+    <string name="here">Here</string>
+    <string name="confirm_request">Your Request Has been Confirmed, Do You Want To Call Them Directly Or Copy Their Number?</string>
+    <string name="you_are_new">Are You New?</string>
+    <string name="_000_000_000">000-000-000</string>
+    <string name="delete">Are You Sure You Want To Delete All Your Informations?</string>
+    <string name="list_requestss">Requests</string>
 </resources>

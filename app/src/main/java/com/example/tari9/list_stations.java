@@ -104,8 +104,16 @@ public class list_stations extends AppCompatActivity implements listener_station
         });
         btngoback.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                db.collection("request").document(requestid).delete();
-                finish();
+                if (requestid!=null){
+                    db.collection("request").document(requestid).delete();
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         btnhelpcenter.setOnClickListener(new View.OnClickListener() {
@@ -122,8 +130,7 @@ public class list_stations extends AppCompatActivity implements listener_station
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 client client = documentSnapshot.toObject(client.class);
-                //.whereEqualTo("address", client.getLocation_address())
-                db.collection("station")
+                db.collection("station").whereEqualTo("address", client.getLocation_address())
                         .addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -223,8 +230,12 @@ public class list_stations extends AppCompatActivity implements listener_station
         super.onBackPressed();
         if (requestid!=null){
             db.collection("request").document(requestid).delete();
+            Intent intent = new Intent(getApplicationContext(), menu.class);
+            startActivity(intent);
             finish();
         } else {
+            Intent intent = new Intent(getApplicationContext(), menu.class);
+            startActivity(intent);
             finish();
         }
     }

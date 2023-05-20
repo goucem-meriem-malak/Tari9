@@ -115,8 +115,12 @@ public class list_mechanics extends AppCompatActivity implements listener_mechan
             public void onClick(View v) {
                 if (requestid!=null){
                     db.collection("request").document(requestid).delete();
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    startActivity(intent);
                     finish();
                 } else {
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    startActivity(intent);
                     finish();
                 }
             }
@@ -135,8 +139,7 @@ public class list_mechanics extends AppCompatActivity implements listener_mechan
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshott) {
                 client client = documentSnapshott.toObject(client.class);
-                //.whereEqualTo("address", client.getLocation_address())
-                db.collection("mechanic")
+                db.collection("mechanic").whereEqualTo("address", client.getLocation_address())
                         .addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -275,17 +278,13 @@ public class list_mechanics extends AppCompatActivity implements listener_mechan
     public void onBackPressed() {
         super.onBackPressed();
         if (requestid!=null){
-            DocumentReference docRef = db.collection("request").document(requestid);
-
-            Map<String, Object> updates = new HashMap<>();
-            updates.put("worker_id", FieldValue.delete());
-            updates.put("worker_location", FieldValue.delete());
-            updates.put("distance", FieldValue.delete());
-            updates.put("state", "not finished");
-            updates.put("price", FieldValue.delete());
-            docRef.update(updates);
+            db.collection("request").document(requestid).delete();
+            Intent intent = new Intent(getApplicationContext(), menu.class);
+            startActivity(intent);
             finish();
         } else {
+            Intent intent = new Intent(getApplicationContext(), menu.class);
+            startActivity(intent);
             finish();
         }
     }

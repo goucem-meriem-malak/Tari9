@@ -39,7 +39,7 @@ public class profile extends AppCompatActivity {
     private FirebaseStorage storage;
     private StorageReference storageRef;
     private TextView fullname;
-    private Button btnhome, btnlistrequests, btnprofile, btngoback, btneditprofile, btnseevehicles, btnlogout, btndelete, btnlanguage;
+    private Button btnhelpcenter, btnhome, btnlistrequests, btnprofile, btngoback, btneditprofile, btnseevehicles, btnlogout, btndelete, btnlanguage;
     private ImageView pfp;
     private String userid, requestid;
 
@@ -67,7 +67,6 @@ public class profile extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(profile.this, "Error, try later", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -80,10 +79,24 @@ public class profile extends AppCompatActivity {
         btndelete = findViewById(R.id.delete_account);
         btnlogout = findViewById(R.id.logout);
         btnlanguage = findViewById(R.id.language);
+        btnhelpcenter = findViewById(R.id.help_center);
         pfp = findViewById(R.id.pfp);
 
         fullname =findViewById(R.id.fullname);
 
+        btngoback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        btnhelpcenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), help_center.class);
+                startActivity(intent);
+            }
+        });
         db.collection("client").document(userid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -155,7 +168,7 @@ public class profile extends AppCompatActivity {
                 Animation shake = AnimationUtils.loadAnimation(profile.this, R.anim.button_vibrate);
                 btndelete.startAnimation(shake);
                 AlertDialog.Builder builder = new AlertDialog.Builder(profile.this);
-                builder.setMessage("Are You Sure You Want To Delete Your Account? All Your Information Will Be Deleted!")
+                builder.setMessage(R.string.delete)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

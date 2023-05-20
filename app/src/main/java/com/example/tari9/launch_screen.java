@@ -112,7 +112,7 @@ public class launch_screen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(launch_screen.this, sign_up.class);
+                Intent intent = new Intent(launch_screen.this, first_screen.class);
                 launch_screen.this.startActivity(intent);
                 finish();
             }

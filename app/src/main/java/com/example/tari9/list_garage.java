@@ -104,7 +104,16 @@ public class list_garage extends AppCompatActivity implements listener_garage {
         btngoback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (requestid!=null){
+                    db.collection("request").document(requestid).delete();
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), menu.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         btnhelpcenter.setOnClickListener(new View.OnClickListener() {
@@ -117,12 +126,11 @@ public class list_garage extends AppCompatActivity implements listener_garage {
     }
 
     private void get_list_available_garages() {
-        //.whereEqualTo("address", client.getLocation_address())
         db.collection("client").document(clientid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshott) {
                 client client = documentSnapshott.toObject(client.class);
-                db.collection("garage")
+                db.collection("garage").whereEqualTo("address", client.getLocation_address())
                         .addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -229,8 +237,12 @@ public class list_garage extends AppCompatActivity implements listener_garage {
         super.onBackPressed();
         if (requestid!=null){
             db.collection("request").document(requestid).delete();
+            Intent intent = new Intent(getApplicationContext(), menu.class);
+            startActivity(intent);
             finish();
         } else {
+            Intent intent = new Intent(getApplicationContext(), menu.class);
+            startActivity(intent);
             finish();
         }
     }

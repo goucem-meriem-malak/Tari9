@@ -78,6 +78,7 @@ public class home extends FragmentActivity implements OnMapReadyCallback, Activi
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         clientid = user.getUid();
+        Toast.makeText(this, "Wait, till your address shows", Toast.LENGTH_SHORT).show();
 
         if (getIntent().getStringExtra("request_mechanic_id")!=null){
             requestid = getIntent().getStringExtra("request_mechanic_id");

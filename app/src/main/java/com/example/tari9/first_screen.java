@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class sign_in extends Activity {
+public class first_screen extends Activity {
 
     private static final String TAG = "PhoneAuthActivity";
     private FirebaseFirestore db;
@@ -42,7 +42,7 @@ public class sign_in extends Activity {
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private EditText fphone, phone, code;
-    private TextView resend,tv, sign_up;
+    private TextView resend,tv;
     private Button next, login;
     private String nbrphone;
 
@@ -58,20 +58,11 @@ public class sign_in extends Activity {
         next = findViewById(R.id.next);
         login = findViewById(R.id.login);
         tv = findViewById(R.id.tv);
-        sign_up = findViewById(R.id.sign_up);
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-
-        sign_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), sign_upp.class);
-                startActivity(intent);
-                finish();
-            }
-        });
         phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
@@ -114,15 +105,15 @@ public class sign_in extends Activity {
                             startPhoneNumberVerification(nbrphone);
                         }
                         else {
-                            Toast.makeText(sign_in.this, "Verify your phone number",Toast.LENGTH_LONG).show();
+                            Toast.makeText(first_screen.this, "Verify your phone number",Toast.LENGTH_LONG).show();
                         }
                     }
                     else {
-                        Toast.makeText(sign_in.this, "Verify country code",Toast.LENGTH_LONG).show();
+                        Toast.makeText(first_screen.this, "Verify country code",Toast.LENGTH_LONG).show();
                     }
                 }
                 else {
-                    Toast.makeText(sign_in.this,"A field id empty",Toast.LENGTH_LONG).show();
+                    Toast.makeText(first_screen.this,"A field id empty",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -149,14 +140,14 @@ public class sign_in extends Activity {
                     verifyPhoneNumberWithCode(mVerificationId, code.getText().toString());
                 }
                 else {
-                    Toast.makeText(sign_in.this, "Verify your code",Toast.LENGTH_LONG).show();
+                    Toast.makeText(first_screen.this, "Verify your code",Toast.LENGTH_LONG).show();
                 }
             }
         });
         resend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resendVerificationCode(nbrphone,mResendToken);
+                resendVerificationCode(phone.getText().toString(),mResendToken);
             }
         });
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -175,7 +166,7 @@ public class sign_in extends Activity {
             public void onCodeSent(@NonNull String verificationId,
                                    @NonNull PhoneAuthProvider.ForceResendingToken token) {
 
-                tv.setText(R.string.codee);
+                tv.setText("Enter Code:");
                 fphone.setVisibility(View.GONE);
                 phone.setVisibility(View.GONE);
                 next.setVisibility(View.GONE);
@@ -189,7 +180,7 @@ public class sign_in extends Activity {
     }
 
     private void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) sign_in.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) first_screen.this.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(phone.getWindowToken(), 0);
     }
 
@@ -245,8 +236,8 @@ public class sign_in extends Activity {
                                         DocumentSnapshot document = task.getResult();
                                         if (document.exists()) {
                                             token_worker(user.getUid());
-                                            Intent in = new Intent(sign_in.this, list_requests_worker.class);
-                                            sign_in.this.startActivity(in);
+                                            Intent in = new Intent(first_screen.this, list_requests_worker.class);
+                                            first_screen.this.startActivity(in);
                                             finish();
                                         } else {
                                             db.collection("client").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -256,13 +247,13 @@ public class sign_in extends Activity {
                                                         DocumentSnapshot document = task.getResult();
                                                         if (document.exists()) {
                                                             update_client(user.getUid(), nbrphone);
-                                                            Intent in = new Intent(sign_in.this, menu.class);
-                                                            sign_in.this.startActivity(in);
+                                                            Intent in = new Intent(first_screen.this, menu.class);
+                                                            first_screen.this.startActivity(in);
                                                             finish();
                                                         } else {
                                                             create_client(user.getUid(), nbrphone);
-                                                            Intent in = new Intent(sign_in.this, menu.class);
-                                                            sign_in.this.startActivity(in);
+                                                            Intent in = new Intent(first_screen.this, menu.class);
+                                                            first_screen.this.startActivity(in);
                                                             finish();
                                                         }
                                                     } else {
@@ -295,6 +286,7 @@ public class sign_in extends Activity {
                             String token = task.getResult();
                             Log.d(TAG, "Firebase token: " + token);
 
+                            // Store the device token in Firestore
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             DocumentReference userRef = db.collection("client").document(""+id);
                             Map<String, Object> m = new HashMap<>();
@@ -317,13 +309,14 @@ public class sign_in extends Activity {
                             String token = task.getResult();
                             Log.d(TAG, "Firebase token: " + token);
 
+                            // Store the device token in Firestore
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             DocumentReference userRef = db.collection("client").document(id);
                             Map<String, Object> m = new HashMap<>();
                             m.put("id", id);
                             m.put("phone", phone);
                             m.put("token", token);
-                            userRef.update(m);
+                            userRef.update(m); // create a new user object with the token
                         } else {
                             Log.w(TAG, "Fetching FCM registration token failed", task.getException());
                         }
@@ -343,11 +336,12 @@ public class sign_in extends Activity {
                                     String token = task.getResult();
                                     Log.d(TAG, "Firebase token: " + token);
 
+                                    // Store the device token in Firestore
                                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                                     DocumentReference userRef = db.collection(dc.get("type").toString()).document(id);
                                     Map<String, Object> m = new HashMap<>();
                                     m.put("token", token);
-                                    userRef.update(m);
+                                    userRef.update(m); // create a new user object with the token
                                 } else {
                                     Log.w(TAG, "Fetching FCM registration token failed", task.getException());
                                 }

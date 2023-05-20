@@ -4,35 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sign_in"
+    android:gravity="center_vertical"
+    android:background="@color/biegish"
     android:id="@+id/all"
-    android:clickable="true">
+    android:clickable="true"
+    android:focusableInTouchMode="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:background="@drawable/firt">
+
         <LinearLayout
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
-            android:paddingBottom="20dp">
+            android:gravity="center">
             <TextView
                 android:id="@+id/tv"
-                style="@style/small_text"
-                android:text="@string/phone_number_"
-                android:layout_gravity="end"
-                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number:"
+                android:layout_gravity="start"
                 android:layout_marginHorizontal="18dp"
-                android:textSize="22sp"/>
+                android:textSize="22sp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="12dp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginHorizontal="18dp">
+
                 <EditText
                     android:id="@+id/fphone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/_213"
-                    android:text="@string/_213"
+                    android:hint="+213"
+                    android:text="+213"
                     android:inputType="phone"
                     android:padding="14dp"
                     android:layout_marginRight="5dp"
@@ -43,7 +55,7 @@
                     android:id="@+id/phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/_000_000_000"
+                    android:hint="000-000-000"
                     android:textColor="@color/black"
                     android:textAlignment="center"
                     android:padding="14dp"
@@ -68,7 +80,6 @@
                 android:gravity="center"
                 android:hint="00-00-00"
                 android:inputType="number"
-                android:textColor="@color/black"
                 android:padding="14dp"
                 android:layout_marginHorizontal="18dp"
                 android:visibility="gone"/>
@@ -91,29 +102,8 @@
                 android:text="@string/resend"
                 android:textAlignment="center"
                 android:visibility="gone"/>
-            <LinearLayout
-                android:id="@+id/signup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="left"
-                android:layout_marginHorizontal="20dp"
-                android:gravity="center_horizontal"
-                android:layout_marginBottom="40dp">
-                <TextView
-                    android:id="@+id/sign_up"
-                    android:text="@string/sign_up"
-                    android:clickable="true"
-                    android:textSize="14sp"
-                    android:layout_gravity="center"
-                    android:gravity="left"
-                    style="@style/link_text"/>
-                <TextView
-                    style="@style/small_text"
-                    android:text="@string/you_are_new"
-                    android:textColor="@color/black"
-                    android:textAlignment="center"/>
-            </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>

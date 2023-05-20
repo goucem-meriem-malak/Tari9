@@ -341,10 +341,12 @@
                                         android:padding="20dp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"/>
-                                    <Spinner
+                                    <TextView
                                         android:id="@+id/oil_unit"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_margin="5dp"
+                                        android:text="L"
                                         android:layout_gravity="center_vertical"/>
                                 </LinearLayout>
                             </LinearLayout>
@@ -352,7 +354,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:gravity="center">
+                                android:gravity="center_horizontal"
+                                android:layout_gravity="center_horizontal">
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -363,6 +366,7 @@
                                     android:id="@+id/oil_price"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:text="DA"
                                     android:gravity="center"
                                     android:layout_weight="1"/>
                             </LinearLayout>
@@ -393,7 +397,9 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:layout_gravity="center_horizontal"
+                                    android:gravity="center_horizontal">
                                     <TextView
                                         android:clickable="true"
                                         android:background="@drawable/style_constraint"
@@ -420,10 +426,12 @@
                                         android:padding="20dp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"/>
-                                    <Spinner
+                                    <TextView
                                         android:id="@+id/fuel_unit"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_margin="5dp"
+                                        android:text="L"
                                         android:layout_gravity="center_vertical"/>
                                 </LinearLayout>
                             </LinearLayout>

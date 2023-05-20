@@ -36,6 +36,7 @@ public class adapter_taxi extends RecyclerView.Adapter<adapter_taxi.myviewholder
     public void onBindViewHolder(@NonNull myviewholder holder, int position) {
         holder.id.setText(taxis.get(position).getId());
         holder.firstname.setText(taxis.get(position).getFirstname());
+        holder.lastname.setText(taxis.get(position).getLastname());
         holder.distance.setText(String.valueOf(taxis.get(position).getDistance()));
         holder.dunit.setText(taxis.get(position).getDunit());
         holder.itemView.setOnClickListener(new View.OnClickListener() {

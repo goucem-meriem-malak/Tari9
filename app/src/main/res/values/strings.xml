@@ -80,7 +80,7 @@
     <string name="list_stations">قائمة المحطات</string>
     <string name="vehicle">سيارة</string>    <!--المركبات -->
     <string name="edit_profile">تعديل الملف الشخصي </string>
-    <string name="see_vehicles">انظر السيارات</string>    <!--المركبات -->
+    <string name="see_vehicles">قائمة سياراتك</string>    <!--المركبات -->
     <string name="_213">+213</string>
     <string name="typee">نوع:</string>
     <string name="markk">العلامة:</string>
@@ -92,7 +92,7 @@
     <string name="stations">المحطات</string>
     <string name="station">المحطات</string>
     <string name="your_vehicle">مركبتك</string>
-    <string name="see_your_vehicles">انطر سياراتك</string>
+    <string name="see_your_vehicles">قائمة سياراتك</string>
     <string name="languages">اللغات</string>
     <string name="log_out">تسجيل الخروج</string>
     <string name="delete_account">حذف الحساب</string>
@@ -127,7 +127,9 @@
     <string name="total_">ألمجموع:</string>
     <string name="passenger_nbr_">عدد الركاب:</string>
     <string name="here">هنا</string>
-    <string name="confirm_request">Your Request Has been Confirmed, Do You Want To Call Them Directly Or Copy Their Number?</string>
     <string name="you_are_new">هل انت جديد؟</string>
     <string name="_000_000_000">000-000-000</string>
+    <string name="delete">هل انت متأكد من حذف حسابك؟ كل معلوماتك سيتم حذفها!</string>
+    <string name="confirm_request">تم تأكيد طلبك، هل تريد الاتصال به الأن؟ أم نسخ رقمه؟</string>
+    <string name="list_requestss">قائمة الطلبات</string>
 </resources>

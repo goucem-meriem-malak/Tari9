@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class request {
     private String id, client_id, worker_id, type, state, dunit, oil_type, fuel_type,
-    oil_unit, fuel_unit, worker_phone, service;;
+    worker_phone, service;;
     private boolean fuel, oil, taxi, ambulance;
     private int passenger_number, team_nbr, fuel_quantity, oil_quantity;;
     private Timestamp date;
@@ -19,7 +19,7 @@ public class request {
     public request() {
     }
 
-    public request(String id, String client_id, String worker_id, String type, String state, String dunit, String oil_type, String fuel_type, String oil_unit, String fuel_unit, String worker_phone, String service, boolean fuel, boolean oil, boolean taxi, boolean ambulance, int passenger_number, int team_nbr, int fuel_quantity, int oil_quantity, Timestamp date, float price, float distance, GeoPoint client_location, GeoPoint worker_location, Map<String, Object> address, veh vehicle) {
+    public request(String id, String client_id, String worker_id, String type, String state, String dunit, String oil_type, String fuel_type, String worker_phone, String service, boolean fuel, boolean oil, boolean taxi, boolean ambulance, int passenger_number, int team_nbr, int fuel_quantity, int oil_quantity, Timestamp date, float price, float distance, GeoPoint client_location, GeoPoint worker_location, Map<String, Object> address, veh vehicle) {
         this.id = id;
         this.client_id = client_id;
         this.worker_id = worker_id;
@@ -28,8 +28,6 @@ public class request {
         this.dunit = dunit;
         this.oil_type = oil_type;
         this.fuel_type = fuel_type;
-        this.oil_unit = oil_unit;
-        this.fuel_unit = fuel_unit;
         this.worker_phone = worker_phone;
         this.service = service;
         this.fuel = fuel;
@@ -111,22 +109,6 @@ public class request {
 
     public void setFuel_type(String fuel_type) {
         this.fuel_type = fuel_type;
-    }
-
-    public String getOil_unit() {
-        return oil_unit;
-    }
-
-    public void setOil_unit(String oil_unit) {
-        this.oil_unit = oil_unit;
-    }
-
-    public String getFuel_unit() {
-        return fuel_unit;
-    }
-
-    public void setFuel_unit(String fuel_unit) {
-        this.fuel_unit = fuel_unit;
     }
 
     public String getWorker_phone() {
