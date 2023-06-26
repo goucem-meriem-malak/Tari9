@@ -13,6 +13,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -57,7 +60,7 @@ public class home extends FragmentActivity implements OnMapReadyCallback, Activi
     private Marker marker;
     private FirebaseFirestore db;
     private EditText userlocation;
-    private Button btnnext, btnhome, btnlist, btnprofil;
+    private Button btnnext, btnsearch, btnhome, btnlist, btnprofil;
     private String clientid, requestid, requesttype, requestservice, address;
     private Map<String, Object> addy;
     private static int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -70,6 +73,7 @@ public class home extends FragmentActivity implements OnMapReadyCallback, Activi
         userlocation = findViewById(R.id.userlocation);
 
         btnnext = findViewById(R.id.next);
+        btnsearch = findViewById(R.id.search);
         btnhome = findViewById(R.id.home);
         btnlist = findViewById(R.id.list_requests);
         btnprofil = findViewById(R.id.profile);
@@ -78,7 +82,6 @@ public class home extends FragmentActivity implements OnMapReadyCallback, Activi
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         clientid = user.getUid();
-        Toast.makeText(this, "Wait, till your address shows", Toast.LENGTH_SHORT).show();
 
         if (getIntent().getStringExtra("request_mechanic_id")!=null){
             requestid = getIntent().getStringExtra("request_mechanic_id");
@@ -97,36 +100,50 @@ public class home extends FragmentActivity implements OnMapReadyCallback, Activi
         mapFragment.getMapAsync(this);
         startLocationListener();
 
+        btnsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userlocation.getText()!=null){
+                    getLocationFromAddress(userlocation.getText().toString());
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please enter an address", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         btnnext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Animation shake = AnimationUtils.loadAnimation(home.this, R.anim.button_vibrate);
                 btnnext.startAnimation(shake);
-                if (getIntent().getStringExtra("request_mechanic_id")!=null){
-                    Intent activityChangeIntent = new Intent(home.this, list_mechanics.class);
-                    activityChangeIntent.putExtra("request_mechanic_id", getIntent().getStringExtra("request_mechanic_id"));
-                    home.this.startActivity(activityChangeIntent);
-                }
-                if (getIntent().getStringExtra("request_tow_id")!=null){
-                    Intent activityChangeIntent = new Intent(home.this, list_tows.class);
-                    activityChangeIntent.putExtra("request_tow_id", getIntent().getStringExtra("request_tow_id"));
-                    if (getIntent().getStringExtra("request_taxi_id")!=null){
-                        activityChangeIntent.putExtra("request_taxi_id", getIntent().getStringExtra("request_taxi_id"));
+                if (userlocation.getText()!=null) {
+                    if (getIntent().getStringExtra("request_mechanic_id")!=null){
+                        Intent activityChangeIntent = new Intent(home.this, list_mechanics.class);
+                        activityChangeIntent.putExtra("request_mechanic_id", getIntent().getStringExtra("request_mechanic_id"));
+                        home.this.startActivity(activityChangeIntent);
                     }
-                    if (getIntent().getStringExtra("request_ambulance_id")!=null){
-                        activityChangeIntent.putExtra("request_ambulance_id", getIntent().getStringExtra("request_ambulance_id"));
+                    if (getIntent().getStringExtra("request_tow_id")!=null){
+                        Intent activityChangeIntent = new Intent(home.this, list_tows.class);
+                        activityChangeIntent.putExtra("request_tow_id", getIntent().getStringExtra("request_tow_id"));
+                        if (getIntent().getStringExtra("request_taxi_id")!=null){
+                            activityChangeIntent.putExtra("request_taxi_id", getIntent().getStringExtra("request_taxi_id"));
+                        }
+                        if (getIntent().getStringExtra("request_ambulance_id")!=null){
+                            activityChangeIntent.putExtra("request_ambulance_id", getIntent().getStringExtra("request_ambulance_id"));
+                        }
+                        home.this.startActivity(activityChangeIntent);
                     }
-                    home.this.startActivity(activityChangeIntent);
-                }
-                if (getIntent().getStringExtra("request_station_id")!=null){
-                    Intent activityChangeIntent = new Intent(home.this, list_stations.class);
-                    activityChangeIntent.putExtra("request_station_id", getIntent().getStringExtra("request_station_id"));
-                    home.this.startActivity(activityChangeIntent);
-                }
-                if (getIntent().getStringExtra("request_team_id")!=null){
-                    Intent activityChangeIntent = new Intent(home.this, list_garage.class);
-                    activityChangeIntent.putExtra("request_team_id", getIntent().getStringExtra("request_team_id"));
-                    home.this.startActivity(activityChangeIntent);
+                    if (getIntent().getStringExtra("request_station_id")!=null){
+                        Intent activityChangeIntent = new Intent(home.this, list_stations.class);
+                        activityChangeIntent.putExtra("request_station_id", getIntent().getStringExtra("request_station_id"));
+                        home.this.startActivity(activityChangeIntent);
+                    }
+                    if (getIntent().getStringExtra("request_team_id")!=null){
+                        Intent activityChangeIntent = new Intent(home.this, list_garage.class);
+                        activityChangeIntent.putExtra("request_team_id", getIntent().getStringExtra("request_team_id"));
+                        home.this.startActivity(activityChangeIntent);
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please enter an address", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -185,32 +202,7 @@ public class home extends FragmentActivity implements OnMapReadyCallback, Activi
                 public void onLocationChanged(Location location) {
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
-                    Locale desiredLocale = Locale.ENGLISH;
-                    Geocoder geocoder = new Geocoder(getApplicationContext(), desiredLocale);
-                    try {
-                        List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                        address = addresses.get(0).getCountryName() + " ";
-                        address += addresses.get(0).getSubAdminArea();
-
-                        addy = new HashMap<>();
-                        addy.put("country", addresses.get(0).getCountryName());
-                        addy.put("city", addresses.get(0).getSubAdminArea());
-
-                        userlocation.setText(address);
-                        btnnext.setEnabled(true);
-
-                        latLng = new LatLng(latitude, longitude);
-                        updateclientlocation();
-                        if (marker != null) {
-                            marker.remove();
-                        }
-                        marker = mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    getAddressFromLocation(latitude, longitude);
                 }
 
                 @Override
@@ -233,9 +225,10 @@ public class home extends FragmentActivity implements OnMapReadyCallback, Activi
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
-        }}
+        }
+    }
 
-    private void updateclientlocation() {
+    private void UpdateClientLocation() {
         Map<String, Object> request = new HashMap<>();
 
         GeoPoint location = new GeoPoint(latLng.latitude, latLng.longitude);
@@ -282,34 +275,7 @@ public class home extends FragmentActivity implements OnMapReadyCallback, Activi
                     public void onLocationChanged(Location location) {
                         double latitude = location.getLatitude();
                         double longitude = location.getLongitude();
-                        Locale desiredLocale = Locale.ENGLISH;
-                        Geocoder geocoder = new Geocoder(getApplicationContext(), desiredLocale);
-                        try {
-                            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                            address = addresses.get(0).getCountryName() + " ";
-                            address += addresses.get(0).getSubAdminArea();
-
-                            addy = new HashMap<>();
-                            addy.put("country", addresses.get(0).getCountryName());
-                            addy.put("city", addresses.get(0).getSubAdminArea());
-
-                            userlocation.setText(address);
-                            btnnext.setEnabled(true);
-
-                            latLng = new LatLng(latitude, longitude);
-                            updateclientlocation();
-
-                            if (marker != null) {
-                                marker.remove();
-                            }
-
-                            marker = mMap.addMarker(new MarkerOptions().position(latLng).title("You"));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        getAddressFromLocation(latitude, longitude);
                     }
 
                     @Override
@@ -331,6 +297,53 @@ public class home extends FragmentActivity implements OnMapReadyCallback, Activi
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    private void getAddressFromLocation(double latitude, double longitude) {
+        Locale desiredLocale = Locale.ENGLISH;
+        Geocoder geocoder = new Geocoder(getApplicationContext(), desiredLocale);
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            latLng = new LatLng(latitude, longitude);
+            addy = new HashMap<>();
+            String country = addresses.get(0).getCountryName(), city = addresses.get(0).getSubAdminArea();
+            addy.put("country", country);
+            addy.put("city", city);
+            showLocationOnMap();
+            UpdateClientLocation();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void getLocationFromAddress(String address) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(address, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+                Address location = addresses.get(0);
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+                latLng = new LatLng(latitude, longitude);
+
+                addy = new HashMap<>();
+                String country = addresses.get(0).getCountryName(), city = addresses.get(0).getSubAdminArea();
+                addy.put("country", country);
+                addy.put("city", city);
+                showLocationOnMap();
+                UpdateClientLocation();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void showLocationOnMap() {
+        userlocation.setText(addy.get("country").toString() + " " + addy.get("city").toString());
+
+        if (marker != null) {
+            marker.remove();
+        }
+        marker = mMap.addMarker(new MarkerOptions().position(latLng).title(userlocation.getText().toString()));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
     }
     @Override
     public void onBackPressed() {

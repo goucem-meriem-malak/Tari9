@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Tari9" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/yellowish_dark_mode</item>
+        <item name="colorPrimary">@color/yellowish</item>
         <item name="colorPrimaryVariant">@color/biegish_dark</item>
         <item name="colorOnPrimary">@color/blueish_dark</item>
         <!-- Secondary brand color. -->
@@ -12,5 +12,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="colorOnTertiary">@color/dark_yellowish</item>
     </style>
 </resources>

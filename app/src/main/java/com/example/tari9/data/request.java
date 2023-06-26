@@ -7,19 +7,19 @@ import java.util.Map;
 
 public class request {
     private String id, client_id, worker_id, type, state, dunit, oil_type, fuel_type,
-    worker_phone, service;;
+    worker_phone, service;
     private boolean fuel, oil, taxi, ambulance;
-    private int passenger_number, team_nbr, fuel_quantity, oil_quantity;;
+    private int passenger_number, team_nbr, fuel_quantity, oil_quantity;
+    private Map<String, Object> address;
     private Timestamp date;
     private float price, distance;
     private GeoPoint client_location, worker_location;
-    private Map<String, Object> address;
     private veh vehicle;
 
     public request() {
     }
 
-    public request(String id, String client_id, String worker_id, String type, String state, String dunit, String oil_type, String fuel_type, String worker_phone, String service, boolean fuel, boolean oil, boolean taxi, boolean ambulance, int passenger_number, int team_nbr, int fuel_quantity, int oil_quantity, Timestamp date, float price, float distance, GeoPoint client_location, GeoPoint worker_location, Map<String, Object> address, veh vehicle) {
+    public request(String id, String client_id, String worker_id, String type, String state, String dunit, String oil_type, String fuel_type, String worker_phone, String service, boolean fuel, boolean oil, boolean taxi, boolean ambulance, int passenger_number, int team_nbr, int fuel_quantity, int oil_quantity, Map<String, Object> address1, Timestamp date, float price, float distance, GeoPoint client_location, GeoPoint worker_location, Map<String, Object> address, veh vehicle) {
         this.id = id;
         this.client_id = client_id;
         this.worker_id = worker_id;
@@ -38,12 +38,13 @@ public class request {
         this.team_nbr = team_nbr;
         this.fuel_quantity = fuel_quantity;
         this.oil_quantity = oil_quantity;
+        this.address = address1;
         this.date = date;
         this.price = price;
         this.distance = distance;
         this.client_location = client_location;
         this.worker_location = worker_location;
-        this.address = address;
+        //this.address = address;
         this.vehicle = vehicle;
     }
 
@@ -230,7 +231,7 @@ public class request {
     public void setWorker_location(GeoPoint worker_location) {
         this.worker_location = worker_location;
     }
-
+/*
     public Map<String, Object> getAddress() {
         return address;
     }
@@ -238,12 +239,20 @@ public class request {
     public void setAddress(Map<String, Object> address) {
         this.address = address;
     }
-
+*/
     public veh getVehicle() {
         return vehicle;
     }
 
     public void setVehicle(veh vehicle) {
         this.vehicle = vehicle;
+    }
+
+    public Map<String, Object> getAddress() {
+        return address;
+    }
+
+    public void setAddress(Map<String, Object> address) {
+        this.address = address;
     }
 }

@@ -9,13 +9,13 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grayish">#E2E2E2</color>
     <color name="greenish">#4e704a</color>
-    <color name="yellowish">#f5a925</color>
-    <color name="blueish">#193852</color>
+    <color name="yellowish">#009688</color>
+    <color name="blueish">#010C12</color>
     <color name="biegish">#DAFFEFCD</color>
     <color name="yellowish_dark_mode">#ffb900</color>
     <color name="blueish_dark">#708d9d</color>
-    <color name="biegish_dark">#35505e</color>
-    <color name="light_beige">#75FFEFCD</color>
+    <color name="biegish_dark">#010C12</color>
+    <color name="light_beige">#E2E4EA</color>
     <color name="dark_yellowish">#CC7A03</color>
     <color name="light_blackish">#DD04050B</color>
 </resources>

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,7 +44,7 @@ public class first_screen extends Activity {
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private EditText fphone, phone, code;
-    private TextView resend,tv;
+    private TextView resend,tv, signup;
     private Button next, login;
     private String nbrphone;
 
@@ -57,6 +59,7 @@ public class first_screen extends Activity {
         resend = findViewById(R.id.resend);
         next = findViewById(R.id.next);
         login = findViewById(R.id.login);
+        signup = findViewById(R.id.sign_up);
         tv = findViewById(R.id.tv);
 
         db = FirebaseFirestore.getInstance();
@@ -77,7 +80,6 @@ public class first_screen extends Activity {
             }
         });
         fphone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!hasFocus){
@@ -103,6 +105,13 @@ public class first_screen extends Activity {
                                 (Integer.parseInt(phone.getText().toString().substring(0,1))!=0)){
                             nbrphone = fphone.getText().toString()+phone.getText().toString();
                             startPhoneNumberVerification(nbrphone);
+                            tv.setText(R.string.codee);
+                            fphone.setVisibility(View.GONE);
+                            phone.setVisibility(View.GONE);
+                            next.setVisibility(View.GONE);
+                            code.setVisibility(View.VISIBLE);
+                            resend.setVisibility(View.VISIBLE);
+                            login.setVisibility(View.VISIBLE);
                         }
                         else {
                             Toast.makeText(first_screen.this, "Verify your phone number",Toast.LENGTH_LONG).show();
@@ -144,6 +153,13 @@ public class first_screen extends Activity {
                 }
             }
         });
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(first_screen.this, upsign.class);
+                startActivity(intent);
+            }
+        });
         resend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,7 +182,7 @@ public class first_screen extends Activity {
             public void onCodeSent(@NonNull String verificationId,
                                    @NonNull PhoneAuthProvider.ForceResendingToken token) {
 
-                tv.setText("Enter Code:");
+                tv.setText(R.string.codee);
                 fphone.setVisibility(View.GONE);
                 phone.setVisibility(View.GONE);
                 next.setVisibility(View.GONE);
@@ -229,39 +245,19 @@ public class first_screen extends Activity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = task.getResult().getUser();
 
-                            db.collection("worker").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            db.collection("client").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if (task.isSuccessful()) {
                                         DocumentSnapshot document = task.getResult();
                                         if (document.exists()) {
-                                            token_worker(user.getUid());
-                                            Intent in = new Intent(first_screen.this, list_requests_worker.class);
+                                            Intent in = new Intent(first_screen.this, menu.class);
                                             first_screen.this.startActivity(in);
                                             finish();
                                         } else {
-                                            db.collection("client").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                    if (task.isSuccessful()) {
-                                                        DocumentSnapshot document = task.getResult();
-                                                        if (document.exists()) {
-                                                            update_client(user.getUid(), nbrphone);
-                                                            Intent in = new Intent(first_screen.this, menu.class);
-                                                            first_screen.this.startActivity(in);
-                                                            finish();
-                                                        } else {
-                                                            create_client(user.getUid(), nbrphone);
-                                                            Intent in = new Intent(first_screen.this, menu.class);
-                                                            first_screen.this.startActivity(in);
-                                                            finish();
-                                                        }
-                                                    } else {
-                                                        Log.d(TAG, "Failed to get document.", task.getException());
-                                                    }
-                                                }
-                                            });
-
+                                            Toast.makeText(first_screen.this, "لا يوجد اي حساب بهذا الرقم! يمكنك التسجيل كمستخدم جديد!", Toast.LENGTH_SHORT).show();
+                                            Animation shake = AnimationUtils.loadAnimation(first_screen.this, R.anim.button_vibrate);
+                                            signup.startAnimation(shake);
                                         }
                                     } else {
                                         Log.d(TAG, "Failed to get document.", task.getException());
@@ -275,81 +271,6 @@ public class first_screen extends Activity {
                         }
                     }
                 });
-    }
-
-    private void create_client(String id, String phone) {
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (task.isSuccessful()) {
-                            String token = task.getResult();
-                            Log.d(TAG, "Firebase token: " + token);
-
-                            // Store the device token in Firestore
-                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            DocumentReference userRef = db.collection("client").document(""+id);
-                            Map<String, Object> m = new HashMap<>();
-                            m.put("id", id);
-                            m.put("phone", phone);
-                            m.put("token", token);
-                            userRef.set(m);
-                        } else {
-                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-                        }
-                    }
-                });
-    }
-    private void update_client(String id, String phone) {
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (task.isSuccessful()) {
-                            String token = task.getResult();
-                            Log.d(TAG, "Firebase token: " + token);
-
-                            // Store the device token in Firestore
-                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            DocumentReference userRef = db.collection("client").document(id);
-                            Map<String, Object> m = new HashMap<>();
-                            m.put("id", id);
-                            m.put("phone", phone);
-                            m.put("token", token);
-                            userRef.update(m); // create a new user object with the token
-                        } else {
-                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-                        }
-                    }
-                });
-    }
-    private void token_worker(String id){
-        db.collection("worker").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                DocumentSnapshot dc = task.getResult();
-                FirebaseMessaging.getInstance().getToken()
-                        .addOnCompleteListener(new OnCompleteListener<String>() {
-                            @Override
-                            public void onComplete(@NonNull Task<String> task) {
-                                if (task.isSuccessful()) {
-                                    String token = task.getResult();
-                                    Log.d(TAG, "Firebase token: " + token);
-
-                                    // Store the device token in Firestore
-                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                    DocumentReference userRef = db.collection(dc.get("type").toString()).document(id);
-                                    Map<String, Object> m = new HashMap<>();
-                                    m.put("token", token);
-                                    userRef.update(m); // create a new user object with the token
-                                } else {
-                                    Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-                                }
-                            }
-                        });
-            }
-        });
-
     }
     private void updateUI(FirebaseUser user) {
 

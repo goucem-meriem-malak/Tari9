@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class get_requests {
     private String id, client_id, worker_id, worker_phone, type, state, oil_type, fuel_type,
-            oil_unit, fuel_unit, service;
+            oil_unit, fuel_unit, service, vehType;
     boolean oil, fuel;
     private GeoPoint client_location, worker_location;
     private Map<String, Object> address;
@@ -19,7 +19,7 @@ public class get_requests {
     public get_requests() {
     }
 
-    public get_requests(String id, String client_id, String worker_id, String worker_phone, String type, String state, String oil_type, String fuel_type, String oil_unit, String fuel_unit, String service, boolean oil, boolean fuel, GeoPoint client_location, GeoPoint worker_location, Map<String, Object> address, Timestamp date, float distance, float price, int passenger_number, int team_nbr, int fuel_quantity, int oil_quantity, veh vehicle) {
+    public get_requests(String id, String client_id, String worker_id, String worker_phone, String type, String state, String oil_type, String fuel_type, String oil_unit, String fuel_unit, String service, String vehicleType, boolean oil, boolean fuel, GeoPoint client_location, GeoPoint worker_location, Map<String, Object> address, Timestamp date, float distance, float price, int passenger_number, int team_nbr, int fuel_quantity, int oil_quantity, veh vehicle) {
         this.id = id;
         this.client_id = client_id;
         this.worker_id = worker_id;
@@ -31,6 +31,7 @@ public class get_requests {
         this.oil_unit = oil_unit;
         this.fuel_unit = fuel_unit;
         this.service = service;
+        this.vehType = vehicleType;
         this.oil = oil;
         this.fuel = fuel;
         this.client_location = client_location;
@@ -236,5 +237,13 @@ public class get_requests {
 
     public void setVehicle(veh vehicle) {
         this.vehicle = vehicle;
+    }
+
+    public String getVehType() {
+        return vehType;
+    }
+
+    public void setVehType(String vehicleType) {
+        this.vehType = vehicleType;
     }
 }

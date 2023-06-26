@@ -39,33 +39,19 @@ public class launch_screen extends AppCompatActivity {
         pb = findViewById(R.id.pb);
 
         if (userid != null) {
-                    db.collection("worker").document(userid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document.exists()) {
-                                    workers();
-                                } else {
-                                    db.collection("client").document(userid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                            if (task.isSuccessful()) {
-                                                DocumentSnapshot document = task.getResult();
-                                                if (document.exists()) {
-                                                    clients();
-                                                } else {
-                                                    news();
-                                                }
-                                            }
-                                        }
-                                    });
-                                }
-                            } else {
-                                pb.setVisibility(View.VISIBLE);
-                            }
+            db.collection("client").document(userid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            clients();
+                        } else {
+                            news();
                         }
-                    });
+                    }
+                }
+            });
         } else {
             news();
         }
@@ -87,17 +73,6 @@ public class launch_screen extends AppCompatActivity {
         name.setVisibility(View.VISIBLE);
     }
 
-
-    private void workers() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(launch_screen.this, list_requests_worker.class);
-                launch_screen.this.startActivity(intent);
-                finish();
-            }
-        }, 3000);
-    }
     private void clients() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -112,7 +87,7 @@ public class launch_screen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(launch_screen.this, first_screen.class);
+                Intent intent = new Intent(launch_screen.this, upsign.class);
                 launch_screen.this.startActivity(intent);
                 finish();
             }

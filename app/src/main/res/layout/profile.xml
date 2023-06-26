@@ -4,6 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/background_profile"
     tools:context=".profile">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
+            android:src="@drawable/background" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/header"
@@ -285,12 +298,12 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_marginTop="10dp"
-                            android:background="@drawable/edit_profile"/>
+                            android:background="@drawable/about"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:text="@string/edit_profile"
+                            android:text="@string/about_us"
                             android:textSize="10sp"
                             android:textAllCaps="true"
                             android:paddingBottom="10dp"

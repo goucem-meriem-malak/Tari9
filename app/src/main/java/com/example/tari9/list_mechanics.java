@@ -139,18 +139,17 @@ public class list_mechanics extends AppCompatActivity implements listener_mechan
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshott) {
                 client client = documentSnapshott.toObject(client.class);
-                db.collection("mechanic").whereEqualTo("address", client.getLocation_address())
+                db.collection("mechanic").whereEqualTo("address.city", "Tebessa")
                         .addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
                             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                                 if (error != null) {
-
+                                    Toast.makeText(list_mechanics.this, "Something went wrong, please try again!", Toast.LENGTH_SHORT).show();
                                 }
                                 for (DocumentChange dc : value.getDocumentChanges()) {
                                     if (dc.getType() == DocumentChange.Type.ADDED) {
                                         mech = dc.getDocument().toObject(mechanic.class);
                                         mech.setDistance(get_distance(client.getLocation(), mech.getLocation()));
-                                        mech.setDunit(get_unit(client.getLocation(), mech.getLocation()));
                                         get_mechanics.add(mech);
                                     }
 
@@ -167,7 +166,6 @@ public class list_mechanics extends AppCompatActivity implements listener_mechan
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshott) {
                 client client = documentSnapshott.toObject(client.class);
-                client_address = (Map<String, Object>) documentSnapshott.get("address");
                 db.collection("mechanic").whereEqualTo("id", mechanic_id)
                         .addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
@@ -179,8 +177,6 @@ public class list_mechanics extends AppCompatActivity implements listener_mechan
                                 for (DocumentChange dc : value.getDocumentChanges() ) {
                                     if (dc.getType() == DocumentChange.Type.ADDED) {
                                             mech = dc.getDocument().toObject(mechanic.class);
-                                            mech.setDistance(get_distance(client.getLocation(), mech.getLocation()));
-                                            mech.setDunit(get_unit(client.getLocation(), mech.getLocation()));
 
                                             HashMap<String, Object> m = new HashMap<String, Object>();
 
@@ -188,19 +184,15 @@ public class list_mechanics extends AppCompatActivity implements listener_mechan
                                             m.put("worker_id", mech.getId());
                                             m.put("worker_location", mech.getLocation());
                                             m.put("worker_phone", mech.getPhone());
-                                            m.put("address",client.getAddress());
-                                            m.put("distance", mech.getDistance());
-                                            m.put("dunit", mech.getDunit());
-                                            if (mech.getDunit()=="M"){
+                                            m.put("distance", get_distance(client.getLocation(), mech.getLocation()));
+                                            if (mech.getDistance()<=1000){
                                                 m.put("price", (mech.getDistance()*2)+350);
                                             } else {
                                                 m.put("price", (mech.getDistance()*2)+500);
                                             }
                                             m.put("state", "waiting");
                                             ref.update(m);
-                                            sendNotification("New Request", "Click to see more");
                                     }
-
                                     adapter_mechanics.notifyDataSetChanged();
                                 }
                             }
@@ -210,7 +202,6 @@ public class list_mechanics extends AppCompatActivity implements listener_mechan
     }
 
     private float get_distance(GeoPoint client_location, GeoPoint mechanic_location) {
-
         Location client_loc = new Location("");
         client_loc.setLatitude(client_location.getLatitude() / 1E6);
         client_loc.setLongitude(client_location.getLongitude() / 1E6);
@@ -226,53 +217,10 @@ public class list_mechanics extends AppCompatActivity implements listener_mechan
         }
         else return distanceInMeters;
     }
-    private String get_unit(GeoPoint client_location, GeoPoint mechanic_location) {
-
-        Location client_loc = new Location("");
-        client_loc.setLatitude(client_location.getLatitude() / 1E6);
-        client_loc.setLongitude(client_location.getLongitude() / 1E6);
-        Location mechanic_loc = new Location("");
-        mechanic_loc.setLatitude(mechanic_location.getLatitude() / 1E6);
-        mechanic_loc.setLongitude(mechanic_location.getLongitude() / 1E6);
-        DecimalFormat df = new DecimalFormat("#.##");
-        float distanceInMeters = Float.parseFloat(df.format(client_loc.distanceTo(mechanic_loc)));
-
-        if (distanceInMeters>1000){
-            return "Km";
-        }
-        else return "M";
-    }
     @Override
     public void onItemClicked(String doc_id, mechanic items, int position) {
         Intent activityChangeIntent = new Intent(list_mechanics.this, menu.class);
         list_mechanics.this.startActivity(activityChangeIntent);
-    }
-    private void sendNotification(String title, String msg) {
-        // Create a notification message
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.logonaked)
-                .setContentTitle(title)
-                .setContentText(msg)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        // Create an intent to open the activity when the user taps the notification
-        Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(pendingIntent);
-
-        // Show the notification
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
     @Override
     public void onBackPressed() {

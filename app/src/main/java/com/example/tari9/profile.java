@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,8 +32,9 @@ import com.google.firebase.storage.StorageReference;
 import java.util.Locale;
 
 
-public class profile extends AppCompatActivity {
+public class profile extends AppCompatActivity{
     private static final int REQUEST_CODE_SELECT_IMAGE = 1;
+    private swipeBack swipeBackHelper;
     private FirebaseFirestore db;
     private FirebaseUser user;
     private FirebaseAuth auth;
@@ -47,28 +49,6 @@ public class profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
-        db = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-        requestid = getIntent().getStringExtra("requestid");
-
-        storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReference();
-
-        userid = user.getUid();
-        StorageReference imageRef = storageRef.child("image/client/"+userid+".jpg");
-        imageRef.getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                pfp.setBackgroundColor(Color.TRANSPARENT);
-                pfp.setImageBitmap(bitmap);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-            }
-        });
 
         btngoback = findViewById(R.id.goback);
         btnhome = findViewById(R.id.home);
@@ -83,6 +63,34 @@ public class profile extends AppCompatActivity {
         pfp = findViewById(R.id.pfp);
 
         fullname =findViewById(R.id.fullname);
+
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        requestid = getIntent().getStringExtra("requestid");
+
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+
+        userid = user.getUid();
+        /*
+        StorageReference imageRef = storageRef.child("image/client/"+userid+".jpg");
+        if (imageRef!=null){
+            imageRef.getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    pfp.setBackgroundColor(Color.TRANSPARENT);
+                    pfp.setImageBitmap(bitmap);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                }
+            });
+        }
+
+         */
 
         btngoback.setOnClickListener(new View.OnClickListener() {
             @Override

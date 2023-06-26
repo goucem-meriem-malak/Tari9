@@ -53,19 +53,12 @@
                 android:backgroundTint="@color/yellowish"/>
                 <TextView
                     android:id="@+id/username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/full_name"
-                    android:layout_marginBottom="10dp"/>
+                    style="@style/smalltext"
+                    android:text="@string/full_name"/>
                 <Button
                     android:id="@+id/edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/style_button"
-                    android:text="@string/edit"
-                    android:textSize="18dp"
-                    android:textColor="@color/black"/>
+                    style="@style/normal_button"
+                    android:text="@string/edit"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/profile_info"
@@ -76,48 +69,28 @@
                 android:layout_marginHorizontal="18dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/full_name"
-                    android:layout_gravity="right"
-                    android:shadowColor="#52000000"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
-                    android:shadowRadius="4"/>
+                    style="@style/user_profile_info"
+                    android:text="@string/full_name"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/firstname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/style_edit_text_plain"
                         android:layout_weight="1"
-                        android:hint="@string/firstname"
-                        android:textColor="@color/black"
-                        android:enabled="false"
-                        />
+                        android:hint="@string/firstname"/>
                     <EditText
                         android:id="@+id/lastname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/style_edit_text_plain"
                         android:layout_weight="1"
-                        android:hint="@string/Lastname"
-                        android:textColor="@color/black"
-                        android:enabled="false"/>
+                        android:hint="@string/Lastname"/>
                 </LinearLayout>
 
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/phone_number"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="5dp"
-                    android:shadowColor="#52000000"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
-                    android:shadowRadius="4"/>
+                    style="@style/user_profile_info"
+                    android:text="@string/phone_number"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -125,51 +98,28 @@
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/fphone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:hint="@string/_213"
-                        android:textColor="@color/black"
-                        android:enabled="false"/>
+                        style="@style/style_edit_text_plain"
+                        android:layout_weight="6"
+                        android:hint="@string/_213"/>
                     <EditText
                         android:id="@+id/phone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:hint="@string/phone_number"
-                        android:textColor="@color/black"
-                        android:enabled="false"/>
+                        style="@style/style_edit_text_plain"
+                        android:layout_weight="1"
+                        android:hint="@string/phone_number"/>
                 </LinearLayout>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/email"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="5dp"
-                    android:shadowColor="#52000000"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
-                    android:shadowRadius="4"/>
+                    style="@style/user_profile_info"
+                    android:text="@string/email"/>
                 <EditText
                     android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/style_edit_text_plain"
                     android:hint="@string/email"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/black"
-                    android:enabled="false"/>
+                    android:inputType="textEmailAddress"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/address"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="5dp"
-                    android:shadowColor="#52000000"
-                    android:shadowDx="2"
-                    android:shadowDy="2"
-                    android:shadowRadius="4"/>
+                    style="@style/user_profile_info"
+                    android:text="@string/address"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -177,64 +127,15 @@
                     android:orientation="horizontal">
                     <EditText
                         android:id="@+id/country"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/style_edit_text_plain"
                         android:layout_weight="1"
-                        android:hint="@string/country"
-                        android:textColor="@color/black"
-                        android:enabled="false"/>
+                        android:hint="@string/country"/>
                     <EditText
                         android:id="@+id/city"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/style_edit_text_plain"
                         android:layout_weight="1"
-                        android:hint="@string/city"
-                        android:textColor="@color/black"
-                        android:enabled="false"/>
+                        android:hint="@string/city"/>
                 </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/vehicle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/typee"/>
-                <EditText
-                    android:id="@+id/type"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/type"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/markk"/>
-                <EditText
-                    android:id="@+id/mark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/mark"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/modell"/>
-                <EditText
-                    android:id="@+id/model"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/model"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/matriculation_number"/>
-                <EditText
-                    android:id="@+id/matri_nbr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/matriculation_number"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tari9.data.get_requests;
 import com.example.tari9.data.request;
 
 import java.text.ParseException;
@@ -20,10 +21,10 @@ import java.util.Locale;
 
 public class adapter_request extends RecyclerView.Adapter<adapter_request.myviewholder> {
     Context context;
-    ArrayList<request> get_requests;
+    ArrayList<get_requests> get_requests;
     private double distance;
 
-    public adapter_request(Context context, ArrayList<request> get_requests) {
+    public adapter_request(Context context, ArrayList<get_requests> get_requests) {
         this.context = context;
         this.get_requests = get_requests;
     }
@@ -37,14 +38,14 @@ public class adapter_request extends RecyclerView.Adapter<adapter_request.myview
 
     @Override
     public void onBindViewHolder(@NonNull myviewholder holder, int position) {
-        request request = get_requests.get(position);
+        get_requests request = get_requests.get(position);
 
-        if (request.getAddress()!=null ){
+        /*if (request.getAddress()!=null ){
             holder.address.setText(request.getAddress().get("country").toString() + " " +
             request.getAddress().get("city").toString());
         } else {
             holder.ll_address.setVisibility(View.GONE);
-        }
+        }*/
         if(request.getDate()==null){
 
             holder.ll_date.setVisibility(View.GONE);

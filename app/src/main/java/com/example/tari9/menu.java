@@ -29,6 +29,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,9 +44,9 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
     private FirebaseUser user;
     private FirebaseAuth auth;
     private String mech_veh_typee, mech_veh_markk, tow_veh_typee, tow_veh_markk,
-            oil_typee, fuel_typee, team_service_typee, oil_unitt, fuel_unitt;
+            oil_typee, fuel_typee, team_service_typee;
     private ArrayAdapter<String> mech_veh_types, mech_veh_marks, tow_veh_types, tow_veh_marks,
-            oil_types, fuel_types, team_service_types, oil_units, fuel_units;
+            oil_types, fuel_types, team_service_types;
     private List<String> team_service = new ArrayList<>(), fueltype = new ArrayList<>(), oiltype = new ArrayList<>(),
     mech_vehtype = new ArrayList<>(), mech_vechmark = new ArrayList<>(), tow_vehtype = new ArrayList<>(),
     tow_vehmark = new ArrayList<>();
@@ -70,6 +72,7 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
+        sendNotification();
 
         taxi_number_passenger=findViewById(R.id.taxi_number_passenger);
         add = findViewById(R.id.add);
@@ -161,7 +164,9 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
             public void onClick(View v) {
                 if (Integer.parseInt(qfuel.getText().toString())!=0){
                     qfuel.setText(String.valueOf(Integer.parseInt(qfuel.getText().toString())-1));
-                    if (qfuel!=null){
+                    if (Integer.parseInt(qfuel.getText().toString())==0){
+                        fuel.setChecked(false);
+                    } else {
                         fprice.setText(Integer.valueOf(qfuel.getText().toString())*45 + "DA");
                     }
                 }
@@ -181,7 +186,9 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
             public void onClick(View v) {
                 if (Integer.parseInt(qoil.getText().toString())!=0){
                     qoil.setText(String.valueOf(Integer.parseInt(qoil.getText().toString())-1));
-                    if (qoil!=null){
+                    if (Integer.parseInt(qoil.getText().toString())==0){
+                        oil.setChecked(false);
+                    } else {
                         oprice.setText(Integer.parseInt(String.valueOf(qoil.getText()))*420 + "DA");
                     }
                 }
@@ -201,7 +208,7 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
         oil_type.setOnItemSelectedListener(this);
         fuel_type = findViewById(R.id.fuel_type);
         fuel_type.setOnItemSelectedListener(this);
-        team_service_type = findViewById(R.id.service_type);
+        team_service_type = findViewById(R.id.team_veh_type);
         team_service_type.setOnItemSelectedListener(this);
 
         mech_veh_types = new ArrayAdapter<String>(menu.this, android.R.layout.simple_spinner_item, mech_vehtype);
@@ -267,12 +274,6 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
             }
         });
         get_tow_veh();
-
-        oil_units = new ArrayAdapter<String>(menu.this, android.R.layout.simple_spinner_item, units);
-        oil_units.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        fuel_units = new ArrayAdapter<String>(menu.this, android.R.layout.simple_spinner_item, units);
-        fuel_units.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         oil_types = new ArrayAdapter<String>(menu.this, android.R.layout.simple_spinner_item, oiltype);
         oil_types.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -709,7 +710,7 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
         m.put("id", request_team_id);
         m.put("client_id", clientid);
         m.put("date", Calendar.getInstance().getTime());
-        m.put("type", "team");
+        m.put("type", "cleaner");
         m.put("service", team_service_typee);
         if (!desc_team.getText().toString().isEmpty()){
             m.put("description", desc_team.getText().toString());
@@ -777,7 +778,7 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
         });
     }
     public void get_oil () {
-        db.collection("types").document("fuel_oil").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("types").document("oil").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -788,6 +789,7 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
                             for (String oil : oilList) {
                                 oiltype.add(oil);
                             }
+                            oil_types.notifyDataSetChanged();
                         }
                     }
                 } else {
@@ -797,7 +799,7 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
         });
     }
     public void get_fuel () {
-        db.collection("types").document("fuel_oil").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("types").document("fuel").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -818,13 +820,13 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
         });
     }
     public void get_team_services () {
-        db.collection("types").document("team").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("types").document("vehicle").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        List<String> serviceList = (List<String>) document.get("services");
+                        List<String> serviceList = (List<String>) document.get("type");
                         if (serviceList != null) {
                             for (String service : serviceList) {
                                 team_service.add(service);
@@ -837,6 +839,22 @@ public class menu extends AppCompatActivity implements AdapterView.OnItemSelecte
                 }
             }
         });
+    }
+    public void sendNotification() {
+        // Create a new message
+        RemoteMessage notificationMessage = new RemoteMessage.Builder("dL5z_kw-SRq80KJZrd-bVd:APA91bE0-NWm42ZIBCMSuq20XRF4U-ail0ogWvmhg3c7JZ2MyjqfCLVPMirQsRbpgej_yXTcApgs1gfMtkhQLMhpkALDCSnKyfqkMrg8LDaZlH66raRJ8KMEEvhG35Rlg8-kX3MNjjra")
+                .setMessageId("00")
+                .addData("title", "You have a new request")
+                .addData("message", "Click here to check it out")
+                .build();
 
+        // Send the message
+        try {
+            FirebaseMessaging.getInstance().send(notificationMessage);
+            System.out.println("Notification sent successfully.");
+        } catch (Exception e) {
+            System.err.println("Error sending notification: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

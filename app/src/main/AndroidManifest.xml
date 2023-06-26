@@ -8,13 +8,15 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" tools:node="remove"/>
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
 
     <application
         android:allowBackup="true"
@@ -47,7 +49,7 @@
             android:name="firebase_analytics_collection_enabled"
             android:value="false" />
         <activity
-            android:name=".launch_screen"
+            android:name=".splash_screen"
             android:exported="true"
             android:label="@string/tari9">
             <intent-filter>
@@ -56,7 +58,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".launch_screen"
+            android:exported="true"
+            android:label="@string/sign_up">
+        </activity>
+        <activity
+            android:name=".upsign"
+            android:exported="true"
+            android:label="@string/sign_up">
+        </activity>
+        <activity
+            android:name=".insign"
             android:exported="true"
             android:label="@string/sign_up">
         </activity>
@@ -65,18 +77,6 @@
             android:exported="true"
             android:label="@string/sign_up">
         </activity>
-        <activity
-            android:name=".sign_up"
-            android:exported="true"
-            android:label="@string/sign_up">
-        </activity>
-        <service
-            android:name=".MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
         <activity
             android:name=".list_mechanics"
             android:exported="true"
@@ -89,32 +89,7 @@
             android:label="@string/sign_up">
         </activity>
         <activity
-            android:name=".profile_worker"
-            android:exported="true"
-            android:label="@string/sign_in">
-        </activity>
-        <activity
-            android:name=".sign_upp"
-            android:exported="true"
-            android:label="@string/sign_in">
-        </activity>
-        <activity
-            android:name=".request_worker"
-            android:exported="true"
-            android:label="@string/garage_services">
-        </activity>
-        <activity
             android:name=".list_ambulance"
-            android:exported="true"
-            android:label="@string/garage_services">
-        </activity>
-        <activity
-            android:name=".todelete1"
-            android:exported="true"
-            android:label="@string/sign_in">
-        </activity>
-        <activity
-            android:name=".td"
             android:exported="true"
             android:label="@string/garage_services">
         </activity>
@@ -139,7 +114,7 @@
             android:label="@string/Help_center">
         </activity>
         <activity
-            android:name=".tryy"
+            android:name=".chat"
             android:exported="true"
             android:label="@string/Help_center">
         </activity>
@@ -148,6 +123,13 @@
             android:exported="true"
             android:label="@string/home">
         </activity>
+        <service
+            android:name=".enter"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <activity
             android:name=".home"
             android:exported="true"
@@ -160,22 +142,6 @@
         </activity>
         <activity
             android:name=".list_vehicle"
-            android:exported="true"
-            android:label="@string/home">
-        </activity>
-        <activity
-            android:name=".list_requests_worker"
-            android:exported="true"
-            android:label="@string/home">
-        </activity>
-        <service android:name=".push"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGIN_EVENT"/>
-            </intent-filter>
-        </service>
-        <activity
-            android:name=".messaging"
             android:exported="true"
             android:label="@string/home">
         </activity>
@@ -196,11 +162,6 @@
         </activity>
         <activity
             android:name=".list_stations"
-            android:exported="true"
-            android:label="@string/home">
-        </activity>
-        <activity
-            android:name=".sign_in"
             android:exported="true"
             android:label="@string/home">
         </activity>
